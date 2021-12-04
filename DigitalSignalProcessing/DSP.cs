@@ -126,18 +126,71 @@ namespace DigitalSignalProcessing
             return xO;
         }
         /// <summary>
-        /// Convolves a signal x with kernel k
+        /// Convolves a signal x with kernel h
         /// </summary>
-        public static double[] Conv(double[] x, double[] k)
+        public static double[] Conv(double[] x, double[] h)
         {
-            double[] y = new double[x.Length + k.Length];
+            double[] filter;
+            double[] input;
 
-            for (int i = 0; i < x.Length; i++)
+            if(x.Length >= h.Length)
             {
-                for(int j = 0; j < k.Length; j++)
+                input = x;
+                filter = h;
+            }
+            else
+            {
+                input = h;
+                filter = x;
+            }
+
+            int L1 = input.Length;
+            int L2 = filter.Length;
+            int L3 = L1 + L2 - 1;
+            double[] y = new double[L3];
+
+            //for(int i = 0; i < L3; i++)
+            //{
+            //
+            //    double sum = 0;
+            //    int n1 = i < L1 ? 0 : i - L1 + 1;
+            //    int n2 = i < L2 ? i : L2 - 1;
+            //
+            //    for (int j = n1; j <= n2; j++)
+            //    {
+            //        sum += input[i - j] * filter[j];
+            //    }
+            //    y[i] = sum;
+            //}
+
+            for(int i = 0; i < L2; i++)
+            {
+                double sum = 0;
+                for(int j = i; j >= 0; j--)
                 {
-                    y[i + j] = y[i + j] + x[i] * k[j];
+                    sum += input[i - j] * filter[j];
                 }
+                y[i] = sum;
+            }
+
+            for(int i = L2; i < L1; i++)
+            {
+                double sum = 0;
+                for(int j = L2; j >= 0; j--)
+                {
+                    sum += input[i - j] * filter[j];
+                }
+                y[i] = sum;
+            }
+
+            for(int i = L1; i < L3; i++)
+            {
+                double sum = 0;
+                for(int j = i - L1 + 1; j < L1; j++)
+                {
+                    sum += input[i - j] * filter[j];
+                }
+                y[i] = sum;
             }
 
             return y;
