@@ -125,5 +125,22 @@ namespace DigitalSignalProcessing
 
             return xO;
         }
+        /// <summary>
+        /// Convolves a signal x with kernel k
+        /// </summary>
+        public static double[] Conv(double[] x, double[] k)
+        {
+            double[] y = new double[x.Length + k.Length];
+
+            for (int i = 0; i < x.Length; i++)
+            {
+                for(int j = 0; j < k.Length; j++)
+                {
+                    y[i + j] = y[i + j] + x[i] * k[j];
+                }
+            }
+
+            return y;
+        }
     }
 }
