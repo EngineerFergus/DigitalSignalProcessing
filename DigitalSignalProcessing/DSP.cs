@@ -91,5 +91,39 @@ namespace DigitalSignalProcessing
 
             return (hist, minVal, maxVal);
         }
+        /// <summary>
+        /// Calculates the even decomposition of a signal
+        /// </summary>
+        public static double[] EvenDecompose(double[] x)
+        {
+            int N = x.Length;
+            double[] xE = new double[N];
+
+            xE[0] = x[0];
+
+            for(int i = 1; i < x.Length; i++)
+            {
+                xE[i] = (x[i] + x[N - i]) / 2;
+            }
+
+            return xE;
+        }
+        /// <summary>
+        /// Calculates the odd decomposition of signal
+        /// </summary>
+        public static double[] OddDecompose(double[] x)
+        {
+            int N = x.Length;
+            double[] xO = new double[N];
+
+            xO[0] = 0;
+
+            for(int i = 1; i < x.Length; i++)
+            {
+                xO[i] = (x[i] - x[N - i]) / 2;
+            }
+
+            return xO;
+        }
     }
 }
