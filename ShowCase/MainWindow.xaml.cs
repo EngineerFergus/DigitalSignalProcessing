@@ -24,6 +24,9 @@ namespace ShowCase
         public MainWindow()
         {
             InitializeComponent();
+
+            Models.UnitTests.RunTests();
+            UnitTestReadout.Text = Models.UnitTests.GetTestSummary();
         }
     }
 }

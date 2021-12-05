@@ -128,68 +128,70 @@ namespace DigitalSignalProcessing
         /// <summary>
         /// Convolves a signal x with kernel h
         /// </summary>
-        public static double[] Conv(double[] x, double[] h)
+        public static double[] NaiveConv(double[] x, double[] h)
         {
-            double[] filter;
-            double[] input;
+            if(h.Length > x.Length) { return NaiveConv(h, x); }
 
-            if(x.Length >= h.Length)
+            int N = x.Length;
+            int M = h.Length;
+            int L = N + M - 1;
+            double[] y = new double[L];
+
+            for(int i = 0; i < L; i++)
             {
-                input = x;
-                filter = h;
+                for(int j = 0; j < M; j++)
+                {
+                    if (i - j < 0) continue;
+                    if (i - j >= N) continue;
+                    y[i] += h[j] * x[i - j];
+                }
             }
-            else
-            {
-                input = h;
-                filter = x;
-            }
 
-            int L1 = input.Length;
-            int L2 = filter.Length;
-            int L3 = L1 + L2 - 1;
-            double[] y = new double[L3];
+            return y;
+        }
 
-            //for(int i = 0; i < L3; i++)
-            //{
-            //
-            //    double sum = 0;
-            //    int n1 = i < L1 ? 0 : i - L1 + 1;
-            //    int n2 = i < L2 ? i : L2 - 1;
-            //
-            //    for (int j = n1; j <= n2; j++)
-            //    {
-            //        sum += input[i - j] * filter[j];
-            //    }
-            //    y[i] = sum;
-            //}
+        public static double[] OptimConv(double[] x, double[] h)
+        {
+            if(h.Length > x.Length) { return OptimConv(h, x); }
 
-            for(int i = 0; i < L2; i++)
+            int N = x.Length;
+            int M = h.Length;
+            int L = N + M - 1;
+            double[] y = new double[L];
+
+            for(int i = 0; i < M - 1; i++)
             {
                 double sum = 0;
-                for(int j = i; j >= 0; j--)
+
+                for(int j = 0; j < i + 1; j++)
                 {
-                    sum += input[i - j] * filter[j];
+                    sum += h[j] * x[i - j];
                 }
+
                 y[i] = sum;
             }
 
-            for(int i = L2; i < L1; i++)
+            for(int i = M - 1; i < L - M + 1; i++)
             {
                 double sum = 0;
-                for(int j = L2; j >= 0; j--)
+
+                for(int j = 0; j < M; j++)
                 {
-                    sum += input[i - j] * filter[j];
+                    sum += h[j] * x[i - j];
                 }
+
                 y[i] = sum;
             }
 
-            for(int i = L1; i < L3; i++)
+            for(int i = L - M + 1; i < L; i++)
             {
                 double sum = 0;
-                for(int j = i - L1 + 1; j < L1; j++)
+
+                for(int j = i - L + M; j < M; j++)
                 {
-                    sum += input[i - j] * filter[j];
+                    sum += h[j] * x[i - j];
                 }
+
                 y[i] = sum;
             }
 
