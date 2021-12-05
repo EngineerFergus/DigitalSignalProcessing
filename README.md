@@ -9,3 +9,7 @@ Most of the algorithms will come from the textbook listed in the sources.
 
 ## 1D Convolution
 The first major topic includes 1D convolution.
+
+<p align="center">
+    <img src="https://latex.codecogs.com/gif.latex?y[i]&space;=&space;\sum_{j&space;=&space;0}^{M&space;-&space;1}h[j]x[i-j]" title="y[i] = \sum_{j = 0}^{M - 1}h[j]x[i-j]" />
+</p>
