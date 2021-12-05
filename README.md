@@ -8,7 +8,7 @@ Sources:
 Most of the algorithms will come from the textbook listed in the sources.
 
 ## 1D Convolution
-The first major topic includes 1D convolution. The equation below shows how the 1D convolution between a signal x and a kernel h is calculated. With x having a length of N and h having a length of M, the output y will have a of L = N + M - 1. The sum runs from i = 0 to L - 1.
+The first major topic includes 1D convolution. The equation below shows how the 1D convolution between a signal x and a kernel h is calculated. With x having a length of N and h having a length of M, the output y will have a of L = N + M - 1.
 
 <p align="center">
     <img src="https://latex.codecogs.com/svg.latex?y&space;=&space;\sum_{i&space;=&space;0}^{L&space;-&space;1}\sum_{j&space;=&space;0}^{M&space;-&space;1}h[j]x[i-j]" title="y = \sum_{i = 0}^{L - 1}\sum_{j = 0}^{M - 1}h[j]x[i-j]" />
