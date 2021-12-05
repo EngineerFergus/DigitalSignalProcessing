@@ -11,7 +11,11 @@ Most of the algorithms will come from the textbook listed in the sources.
 The first major topic includes 1D convolution. The equation below shows how the 1D convolution between a signal x and a kernel h is calculated. With x having a length of N and h having a length of M, the output y will have a of L = N + M - 1.
 
 <p align="center">
-    <img src="https://latex.codecogs.com/svg.latex?y&space;=&space;\sum_{i&space;=&space;0}^{L&space;-&space;1}\sum_{j&space;=&space;0}^{M&space;-&space;1}h[j]x[i-j]" title="y = \sum_{i = 0}^{L - 1}\sum_{j = 0}^{M - 1}h[j]x[i-j]" />
+    <img src="https://latex.codecogs.com/svg.latex?y[i]&space;=&space;\sum_{j=0}^{M-1}h[j]x[i-j]" title="y[i] = \sum_{j=0}^{M-1}h[j]x[i-j]" />
 </p>
 
-However, this algorithm has several boundary conditions that must be checked while calculating the convolution. To try and optimize the convolution while avoiding these boundary checks, the loop outlined above was split into three separate loops.
+However, this algorithm has several boundary conditions that must be checked while calculating the convolution. During a naive implementation of this algorithm, the index for x must be checked for every iteration of i. To avoid checking the indexing of x, the for loop for calculating the convolution can be split into three separate loops. These loops are shown below in the updated equations for y.
+
+<p align="center">
+    <img src="https://latex.codecogs.com/svg.latex?y[i]&space;=&space;\begin{cases}&space;&&space;\text{&space;if&space;}&space;0&space;\leq&space;i<&space;M-1&space;\text{&space;,&space;}\sum_{j=0}^{i}h[j]x[i-j]\\&space;&&space;\text{&space;if&space;}&space;M-1\leq&space;i<&space;L-M&plus;1\text{&space;,&space;}&space;\sum_{j=0}^{M-1}h[j]x[i-j]&space;\\&space;&&space;\text{&space;if&space;}&space;L-M&plus;1\leq&space;i<L\text{&space;,&space;}\sum_{j=i-L&plus;M}^{M-1}h[j]x[i-j]&space;\end{cases}" title="y[i] = \begin{cases} & \text{ if } 0 \leq i< M-1 \text{ , }\sum_{j=0}^{i}h[j]x[i-j]\\ & \text{ if } M-1\leq i< L-M+1\text{ , } \sum_{j=0}^{M-1}h[j]x[i-j] \\ & \text{ if } L-M+1\leq i<L\text{ , }\sum_{j=i-L+M}^{M-1}h[j]x[i-j] \end{cases}" />
+</p>
