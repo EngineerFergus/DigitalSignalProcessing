@@ -197,5 +197,29 @@ namespace DigitalSignalProcessing
 
             return y;
         }
+
+        public static double[] Hamming(int M)
+        {
+            double[] window = new double[M + 1];
+
+            for(int i = 0; i <= M; i++)
+            {
+                window[i] = 0.54 - 0.46 * Math.Cos(2 * Math.PI * i / M);
+            }
+
+            return window;
+        }
+
+        public static double[] Blackman(int M)
+        {
+            double[] window = new double[M + 1];
+
+            for(int i = 0; i <= M; i++)
+            {
+                window[i] = 0.42 - 0.5 * Math.Cos(2 * Math.PI * i / M) + 0.08 * Math.Cos(4 * Math.PI * i / M);
+            }
+
+            return window;
+        }
     }
 }
