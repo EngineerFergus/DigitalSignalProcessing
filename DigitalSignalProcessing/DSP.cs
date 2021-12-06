@@ -212,7 +212,6 @@ namespace DigitalSignalProcessing
 
         public static double[] Blackman(int M)
         {
-            //Test comment
             double[] window = new double[M + 1];
 
             for(int i = 0; i <= M; i++)
