@@ -149,7 +149,9 @@ namespace DigitalSignalProcessing
 
             return y;
         }
-
+        /// <summary>
+        /// Optimized 1D convolution that avoids boundary checks with each loop. Convolves an input x with a kernel h.
+        /// </summary>
         public static double[] OptimConv(double[] x, double[] h)
         {
             if(h.Length > x.Length) { return OptimConv(h, x); }
@@ -197,7 +199,9 @@ namespace DigitalSignalProcessing
 
             return y;
         }
-
+        /// <summary>
+        /// Generates a Hamming window sequence of total length M + 1
+        /// </summary>
         public static double[] Hamming(int M)
         {
             double[] window = new double[M + 1];
@@ -209,7 +213,9 @@ namespace DigitalSignalProcessing
 
             return window;
         }
-
+        /// <summary>
+        /// Generates a Blackman window sequence of total length M + 1
+        /// </summary>
         public static double[] Blackman(int M)
         {
             double[] window = new double[M + 1];
@@ -220,6 +226,53 @@ namespace DigitalSignalProcessing
             }
 
             return window;
+        }
+        /// <summary>
+        /// Generates an impulse sequence with a given magnitude and delay. All samples are zero except at the given delay timepoint,
+        /// where the sequence has a value equal to the given magnitude.
+        /// </summary>
+        public static double[] Impulse(int length, double magnitude = 1, int delay = 0)
+        {
+            if(delay >= length)
+            {
+                throw new Exception($"Exception in {nameof(Impulse)}, tried making an impulse sequence of length {length} and delay {delay}." +
+                    $"Delay must be less than total length");
+            }
+
+            if (delay < 0)
+            {
+                throw new Exception($"Exception in {nameof(Step)}, delay must be greater than or equal to zero.");
+            }
+
+            double[] impulse = new double[length];
+            impulse[delay] = magnitude;
+            return impulse;
+        }
+        /// <summary>
+        /// Generates a step sequence where all samples after the given delay are equal to the given magnitude.
+        /// </summary>
+        public static double[] Step(int length, double magnitude = 1, int delay = 0)
+        {
+            if(delay >= length)
+            {
+                throw new Exception($"Exception in {nameof(Step)}, tried making a step sequence with delay of {delay} and total " +
+                    $"length {length}. Delay must be less than total length.");
+            }
+
+            if(delay < 0)
+            {
+                throw new Exception($"Exception in {nameof(Step)}, delay must be greater than or equal to zero.");
+            }
+
+
+            double[] step = new double[length];
+
+            for(int i = delay; i < length; i++)
+            {
+                step[i] = magnitude;
+            }
+
+            return step;
         }
     }
 }
