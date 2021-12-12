@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Numerics;
 
 namespace DigitalSignalProcessing
 {
@@ -228,6 +229,22 @@ namespace DigitalSignalProcessing
             return window;
         }
         /// <summary>
+        /// Generates a rectangle sequence of length M where L samples equals the given starting at the specified delay point.
+        /// </summary>
+        public static double[] Rectangle(int L, int M, int delay, double magnitude = 1)
+        {
+            double[] rectSequence = new double[M];
+
+            int stopIdx = Math.Min(M, delay + L + 1);
+
+            for(int i = delay; i < stopIdx; i++)
+            {
+                rectSequence[i] = magnitude;
+            }
+
+            return rectSequence;
+        }
+        /// <summary>
         /// Generates an impulse sequence with a given magnitude and delay. All samples are zero except at the given delay timepoint,
         /// where the sequence has a value equal to the given magnitude.
         /// </summary>
@@ -241,7 +258,7 @@ namespace DigitalSignalProcessing
 
             if (delay < 0)
             {
-                throw new Exception($"Exception in {nameof(Step)}, delay must be greater than or equal to zero.");
+                throw new Exception($"Exception in {nameof(Impulse)}, delay must be greater than or equal to zero.");
             }
 
             double[] impulse = new double[length];
@@ -273,6 +290,59 @@ namespace DigitalSignalProcessing
             }
 
             return step;
+        }
+        /// <summary>
+        /// Calculates the moving average of sequence x with given box size. Box size must be odd.
+        /// </summary>
+        public static double[] AverageFilter(double[] x, int boxSize)
+        {
+            if(boxSize % 2 == 0)
+            {
+                throw new Exception($"Exception in {nameof(AverageFilter)}, boxSize must be an odd number. Given boxSize was {boxSize}");
+            }
+
+            int N = x.Length;
+            int halfSize = boxSize / 2;
+            int Nprime = x.Length - halfSize;
+            double[] y = new double[x.Length];
+
+            for(int i = 0; i < halfSize; i++)
+            {
+                double sum = 0.0;
+
+                for(int j = 0; j < i + halfSize + 1; j++)
+                {
+                    sum += x[i + j];
+                }
+
+                y[i] = sum / boxSize;
+            }
+
+            for(int i = halfSize; i < Nprime; i++)
+            {
+                double sum = 0.0;
+
+                for(int j = i - halfSize; j < i + halfSize + 1; j++)
+                {
+                    sum += x[i + j];
+                }
+
+                y[i] = sum / boxSize;
+            }
+
+            for(int i = Nprime; i < N; i++)
+            {
+                double sum = 0.0;
+
+                for(int j = i - halfSize; j < N; j++)
+                {
+                    sum += x[i + j];
+                }
+
+                y[i] = sum / boxSize;
+            }
+
+            return y;
         }
     }
 }
