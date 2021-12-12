@@ -250,16 +250,7 @@ namespace DigitalSignalProcessing
         /// </summary>
         public static double[] Impulse(int length, double magnitude = 1, int delay = 0)
         {
-            if(delay >= length)
-            {
-                throw new Exception($"Exception in {nameof(Impulse)}, tried making an impulse sequence of length {length} and delay {delay}." +
-                    $"Delay must be less than total length");
-            }
-
-            if (delay < 0)
-            {
-                throw new Exception($"Exception in {nameof(Impulse)}, delay must be greater than or equal to zero.");
-            }
+            GuardClauses.IsOutOfBounds(nameof(Impulse), nameof(delay), nameof(length), delay, length);
 
             double[] impulse = new double[length];
             impulse[delay] = magnitude;
@@ -270,17 +261,7 @@ namespace DigitalSignalProcessing
         /// </summary>
         public static double[] Step(int length, double magnitude = 1, int delay = 0)
         {
-            if(delay >= length)
-            {
-                throw new Exception($"Exception in {nameof(Step)}, tried making a step sequence with delay of {delay} and total " +
-                    $"length {length}. Delay must be less than total length.");
-            }
-
-            if(delay < 0)
-            {
-                throw new Exception($"Exception in {nameof(Step)}, delay must be greater than or equal to zero.");
-            }
-
+            GuardClauses.IsOutOfBounds(nameof(Step), nameof(delay), nameof(length), delay, length);
 
             double[] step = new double[length];
 
@@ -296,10 +277,8 @@ namespace DigitalSignalProcessing
         /// </summary>
         public static double[] AverageFilter(double[] x, int boxSize)
         {
-            if(boxSize % 2 == 0)
-            {
-                throw new Exception($"Exception in {nameof(AverageFilter)}, boxSize must be an odd number. Given boxSize was {boxSize}");
-            }
+            GuardClauses.IsEven(nameof(AverageFilter), nameof(boxSize), boxSize);
+            GuardClauses.IsLessThan(nameof(AverageFilter), nameof(boxSize), boxSize, 0);
 
             int N = x.Length;
             int halfSize = boxSize / 2;
