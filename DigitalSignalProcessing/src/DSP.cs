@@ -67,7 +67,7 @@ namespace DigitalSignalProcessing
 
             for(int i = 0; i < x.Length; i++)
             {
-                hist[x[i]]++;
+                hist[x[i] - minVal]++;
             }
 
             return (hist, minVal, maxVal);
@@ -86,7 +86,7 @@ namespace DigitalSignalProcessing
 
             for(int i = 0; i < x.Length; i++)
             {
-                bin = (int)(x[i] * step);
+                bin = (int)((x[i] - minVal) * step);
                 hist[bin]++;
             }
 
