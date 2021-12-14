@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DigitalSignalProcessing
 {
-    public static class GuardClauses
+    static class GuardClauses
     {
         public static void IsOutOfBounds(string methodName, string argumentName, string maxName, int givenValue, int maxValue)
         {
