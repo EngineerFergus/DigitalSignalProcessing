@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31402.337
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigitalSignalProcessing", "DigitalSignalProcessing\DigitalSignalProcessing.csproj", "{F3E95628-468F-47D9-A25D-F8C372722DCE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigitalSignalProcessing", "DigitalSignalProcessing\DigitalSignalProcessing.csproj", "{F3E95628-468F-47D9-A25D-F8C372722DCE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShowCase", "ShowCase\ShowCase.csproj", "{44AB689D-41A3-4C90-A969-449E19630AA2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShowCase", "ShowCase\ShowCase.csproj", "{44AB689D-41A3-4C90-A969-449E19630AA2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigitalSignalProcessingTests", "DigitalSignalProcessingTests\DigitalSignalProcessingTests.csproj", "{8F3ED0B6-3ED8-4CBB-A802-36A793570F4B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{44AB689D-41A3-4C90-A969-449E19630AA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{44AB689D-41A3-4C90-A969-449E19630AA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{44AB689D-41A3-4C90-A969-449E19630AA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F3ED0B6-3ED8-4CBB-A802-36A793570F4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F3ED0B6-3ED8-4CBB-A802-36A793570F4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F3ED0B6-3ED8-4CBB-A802-36A793570F4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F3ED0B6-3ED8-4CBB-A802-36A793570F4B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
