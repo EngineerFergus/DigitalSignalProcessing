@@ -10,7 +10,7 @@ namespace DigitalSignalProcessing
     public static class DSP
     {
         /// <summary>
-        /// Calculates the mean and standard deviation of a signal.
+        /// Calculates the mean and sample standard deviation of a signal.
         /// </summary>
         public static (double mean, double std) CalcMeanStd(double[] x)
         {
@@ -31,8 +31,9 @@ namespace DigitalSignalProcessing
 
             return (mean, std);
         }
+
         /// <summary>
-        /// Calculates the mean and standard deviation of a signal.
+        /// Calculates the mean and sample standard deviation of a signal.
         /// </summary>
         public static (double mean, double std) CalcMeanStd(int[] x)
         {
@@ -53,6 +54,7 @@ namespace DigitalSignalProcessing
 
             return (mean, std);
         }
+
         /// <summary>
         /// Calculates the histogram of a signal where first bin in histogram corresponds to total count of the min value
         /// and the last bin corresponds to the total count for the max value.
@@ -72,6 +74,7 @@ namespace DigitalSignalProcessing
 
             return (hist, minVal, maxVal);
         }
+
         /// <summary>
         /// Calculates the binned histogram of a signal of doubles. 
         /// </summary>
@@ -87,16 +90,20 @@ namespace DigitalSignalProcessing
             for(int i = 0; i < x.Length; i++)
             {
                 bin = (int)((x[i] - minVal) * step);
+                bin = bin >= bins ? bins - 1 : bin;
                 hist[bin]++;
             }
 
             return (hist, minVal, maxVal);
         }
+
         /// <summary>
         /// Calculates the even decomposition of a signal
         /// </summary>
         public static double[] EvenDecompose(double[] x)
         {
+            GuardClauses.IsOdd(nameof(EvenDecompose), $"length of {nameof(x)}", x.Length);
+
             int N = x.Length;
             double[] xE = new double[N];
 
@@ -109,11 +116,14 @@ namespace DigitalSignalProcessing
 
             return xE;
         }
+
         /// <summary>
         /// Calculates the odd decomposition of signal
         /// </summary>
         public static double[] OddDecompose(double[] x)
         {
+            GuardClauses.IsOdd(nameof(OddDecompose), $"length of {nameof(x)}", x.Length);
+
             int N = x.Length;
             double[] xO = new double[N];
 
@@ -126,6 +136,7 @@ namespace DigitalSignalProcessing
 
             return xO;
         }
+
         /// <summary>
         /// Convolves a signal x with kernel h
         /// </summary>
@@ -150,6 +161,7 @@ namespace DigitalSignalProcessing
 
             return y;
         }
+
         /// <summary>
         /// Optimized 1D convolution that avoids boundary checks with each loop. Convolves an input x with a kernel h.
         /// </summary>
@@ -200,6 +212,7 @@ namespace DigitalSignalProcessing
 
             return y;
         }
+
         /// <summary>
         /// Generates a Hamming window sequence of total length M + 1
         /// </summary>
@@ -214,6 +227,7 @@ namespace DigitalSignalProcessing
 
             return window;
         }
+
         /// <summary>
         /// Generates a Blackman window sequence of total length M + 1
         /// </summary>
@@ -228,6 +242,7 @@ namespace DigitalSignalProcessing
 
             return window;
         }
+
         /// <summary>
         /// Generates a rectangle sequence of length M where L samples equals the given starting at the specified delay point.
         /// </summary>
@@ -244,6 +259,7 @@ namespace DigitalSignalProcessing
 
             return rectSequence;
         }
+
         /// <summary>
         /// Generates an impulse sequence with a given magnitude and delay. All samples are zero except at the given delay timepoint,
         /// where the sequence has a value equal to the given magnitude.
@@ -256,6 +272,7 @@ namespace DigitalSignalProcessing
             impulse[delay] = magnitude;
             return impulse;
         }
+
         /// <summary>
         /// Generates a step sequence where all samples after the given delay are equal to the given magnitude.
         /// </summary>
@@ -272,6 +289,7 @@ namespace DigitalSignalProcessing
 
             return step;
         }
+
         /// <summary>
         /// Calculates the moving average of sequence x with given box size. Box size must be odd.
         /// </summary>

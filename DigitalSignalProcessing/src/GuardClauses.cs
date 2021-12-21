@@ -29,6 +29,14 @@ namespace DigitalSignalProcessing
             }
         }
 
+        public static void IsOdd(string methodName, string argumentName, int givenValue)
+        {
+            if(givenValue % 2 == 1)
+            {
+                throw new ArgumentException($"Exception in {methodName}, {argumentName} cannot be odd.");
+            }
+        }
+
         public static void IsLessThan(string methodName, string argumentName, int givenValue, int minValue)
         {
             if(givenValue < minValue)
