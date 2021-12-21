@@ -215,39 +215,42 @@ namespace DigitalSignalProcessing
         }
 
         /// <summary>
-        /// Generates a Hamming window sequence of total length M + 1
+        /// Generates a Hamming window sequence of total length M
         /// </summary>
         public static double[] Hamming(int M)
         {
-            double[] window = new double[M + 1];
+            double[] window = new double[M];
+            int mPrime = M - 1;
 
-            for(int i = 0; i <= M; i++)
+            for(int i = 0; i < M; i++)
             {
-                window[i] = 0.54 - 0.46 * Math.Cos(2 * Math.PI * i / M);
+                window[i] = 0.54 - 0.46 * Math.Cos(2 * Math.PI * i / mPrime);
             }
 
             return window;
         }
 
         /// <summary>
-        /// Generates a Blackman window sequence of total length M + 1
+        /// Generates a Blackman window sequence of total length M
         /// </summary>
         public static double[] Blackman(int M)
         {
-            double[] window = new double[M + 1];
+            double[] window = new double[M];
+            int mPrime = M - 1;
 
-            for(int i = 0; i <= M; i++)
+            for(int i = 0; i < M; i++)
             {
-                window[i] = 0.42 - 0.5 * Math.Cos(2 * Math.PI * i / M) + 0.08 * Math.Cos(4 * Math.PI * i / M);
+                window[i] = 0.42 - 0.5 * Math.Cos(2 * Math.PI * i / mPrime) + 0.08 * Math.Cos(4 * Math.PI * i / mPrime);
             }
 
             return window;
         }
 
         /// <summary>
-        /// Generates a rectangle sequence of length M where L samples equals the given starting at the specified delay point.
+        /// Generates a rectangle sequence of length M where L samples equals the given magnitude starting at the specified
+        /// delay point.
         /// </summary>
-        public static double[] Rectangle(int L, int M, int delay, double magnitude = 1)
+        public static double[] Rectangle(int M, int L, double magnitude = 1, int delay = 0)
         {
             double[] rectSequence = new double[M];
 
@@ -262,28 +265,28 @@ namespace DigitalSignalProcessing
         }
 
         /// <summary>
-        /// Generates an impulse sequence with a given magnitude and delay. All samples are zero except at the given delay timepoint,
+        /// Generates an impulse sequence of length M with a given magnitude and delay. All samples are zero except at the given delay timepoint,
         /// where the sequence has a value equal to the given magnitude.
         /// </summary>
-        public static double[] Impulse(int length, double magnitude = 1, int delay = 0)
+        public static double[] Impulse(int M, double magnitude = 1, int delay = 0)
         {
-            GuardClauses.IsOutOfBounds(nameof(Impulse), nameof(delay), nameof(length), delay, length);
+            GuardClauses.IsOutOfBounds(nameof(Impulse), nameof(delay), nameof(M), delay, M);
 
-            double[] impulse = new double[length];
+            double[] impulse = new double[M];
             impulse[delay] = magnitude;
             return impulse;
         }
 
         /// <summary>
-        /// Generates a step sequence where all samples after the given delay are equal to the given magnitude.
+        /// Generates a step sequence of length M where all samples after the given delay are equal to the given magnitude.
         /// </summary>
-        public static double[] Step(int length, double magnitude = 1, int delay = 0)
+        public static double[] Step(int M, double magnitude = 1, int delay = 0)
         {
-            GuardClauses.IsOutOfBounds(nameof(Step), nameof(delay), nameof(length), delay, length);
+            GuardClauses.IsOutOfBounds(nameof(Step), nameof(delay), nameof(M), delay, M);
 
-            double[] step = new double[length];
+            double[] step = new double[M];
 
-            for(int i = delay; i < length; i++)
+            for(int i = delay; i < M; i++)
             {
                 step[i] = magnitude;
             }
