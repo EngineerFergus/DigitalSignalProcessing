@@ -98,7 +98,7 @@ namespace DigitalSignalProcessing
         }
 
         /// <summary>
-        /// Calculates the even decomposition of a signal
+        /// Calculates the even decomposition of a signal. x must have an even length.
         /// </summary>
         public static double[] EvenDecompose(double[] x)
         {
@@ -118,7 +118,7 @@ namespace DigitalSignalProcessing
         }
 
         /// <summary>
-        /// Calculates the odd decomposition of signal
+        /// Calculates the odd decomposition of signal. x must have an even length.
         /// </summary>
         public static double[] OddDecompose(double[] x)
         {
@@ -138,7 +138,7 @@ namespace DigitalSignalProcessing
         }
 
         /// <summary>
-        /// Convolves a signal x with kernel h
+        /// Convolves a signal x with kernel h. Output length is length of x plus length of h minus 1.
         /// </summary>
         public static double[] NaiveConv(double[] x, double[] h)
         {
@@ -164,6 +164,7 @@ namespace DigitalSignalProcessing
 
         /// <summary>
         /// Optimized 1D convolution that avoids boundary checks with each loop. Convolves an input x with a kernel h.
+        /// Output length is length of x plus length of h minus 1.
         /// </summary>
         public static double[] OptimConv(double[] x, double[] h)
         {
