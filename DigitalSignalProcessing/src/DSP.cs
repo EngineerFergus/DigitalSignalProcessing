@@ -254,7 +254,7 @@ namespace DigitalSignalProcessing
         {
             double[] rectSequence = new double[M];
 
-            int stopIdx = Math.Min(M, delay + L + 1);
+            int stopIdx = Math.Min(M, delay + L);
 
             for(int i = delay; i < stopIdx; i++)
             {
