@@ -40,6 +40,7 @@ namespace DigitalSignalProcessing
         }
         /// <summary>
         /// Returns a sample from a Normal (Gaussian) Distribution with a given mean and standard deviation.
+        /// Uses the Box-Muller transform to generate the samples.
         /// </summary>
         public static double SampleNormalDistribution(double mean = 0, double std = 1)
         {
