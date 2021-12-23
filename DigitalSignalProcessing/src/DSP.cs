@@ -346,5 +346,51 @@ namespace DigitalSignalProcessing
 
             return y;
         }
+
+        /// <summary>
+        /// Calculates the Discrete Fourier Transform of a given sequence.
+        /// </summary>
+        public static Complex[] DFT(double[] x)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Calculates the inverse Discrete Fourier Transform of a given sequence
+        /// </summary>
+        public static double[] IDFT(Complex[] x)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Calculates the magnitude of a given complex sequence.
+        /// </summary>
+        public static double[] Magnitude(Complex[] x)
+        {
+            double[] xMag = new double[x.Length];
+
+            for(int i = 0; i < x.Length; i++)
+            {
+                xMag[i] = x[i].Magnitude;
+            }
+
+            return xMag;
+        }
+
+        /// <summary>
+        /// Calculates the phase of a given complex sequence.
+        /// </summary>
+        public static double[] Phase(Complex[] x)
+        {
+            double[] xPhase = new double[x.Length];
+
+            for(int i = 0; i < x.Length; i++)
+            {
+                xPhase[i] = x[i].Phase;
+            }
+
+            return xPhase;
+        }
     }
 }
