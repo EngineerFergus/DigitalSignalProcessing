@@ -314,7 +314,7 @@ namespace DigitalSignalProcessing
 
                 for(int j = 0; j < i + halfSize + 1; j++)
                 {
-                    sum += x[i + j];
+                    sum += x[j];
                 }
 
                 y[i] = sum / boxSize;
@@ -326,7 +326,7 @@ namespace DigitalSignalProcessing
 
                 for(int j = i - halfSize; j < i + halfSize + 1; j++)
                 {
-                    sum += x[i + j];
+                    sum += x[j];
                 }
 
                 y[i] = sum / boxSize;
@@ -338,7 +338,7 @@ namespace DigitalSignalProcessing
 
                 for(int j = i - halfSize; j < N; j++)
                 {
-                    sum += x[i + j];
+                    sum += x[j];
                 }
 
                 y[i] = sum / boxSize;

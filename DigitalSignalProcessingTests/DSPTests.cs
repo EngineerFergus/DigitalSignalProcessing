@@ -614,5 +614,36 @@ namespace DigitalSignalProcessingTests
 
             Assert.AreEqual(delay, zeroSamples, "Step sequence delay was incorrect.");
         }
+
+        [TestMethod]
+        public void TestAverageFilter_OutputLength()
+        {
+            double[] x = new double[] { 1, 2, 3, 4, 5, 4, 3, 2, 1 };
+            int boxSize = 3;
+            double[] y = DSP.AverageFilter(x, boxSize);
+            Assert.AreEqual(x.Length, y.Length, "Average filter output length was incorrect.");
+        }
+
+        [TestMethod]
+        public void TestAverageFilter_OutputValues()
+        {
+            double[] x = new double[] { 1, 2, 3, 4, 10, 10, 4, 3, 2, 1 };
+            int boxSize = 3;
+            double[] y = DSP.AverageFilter(x, boxSize);
+            double[] yTrue = new double[] { 1, 2, 3, 5.67, 8, 8, 5.67, 3, 2, 1 };
+
+            for(int i = 0; i < y.Length; i++)
+            {
+                Assert.AreEqual(yTrue[i], y[i], 0.01, $"Average filter output incorrect at location {i}.");
+            }
+        }
+
+        [TestMethod]
+        public void TestAverageFilter_LargeBoxSize()
+        {
+            double[] x = new double[] { 1, 2, 3, 4, 10, 10, 4, 3, 2, 1 };
+            int boxSize = 9;
+            double[] y = DSP.AverageFilter(x, boxSize);
+        }
     }
 }
