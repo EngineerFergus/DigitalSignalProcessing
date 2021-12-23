@@ -41,7 +41,7 @@ namespace DigitalSignalProcessing
         /// <summary>
         /// Returns a sample from a Normal (Gaussian) Distribution with a given mean and standard deviation.
         /// </summary>
-        public static double SampleNormalDist(double mean = 0, double std = 1)
+        public static double SampleNormalDistribution(double mean = 0, double std = 1)
         {
             double x = Math.Sqrt(-2 * Math.Log(rng.NextDouble())) * Math.Cos(2 * Math.PI * rng.NextDouble());
             return mean == 0 && std == 1 ? x : (x * std) + mean;
