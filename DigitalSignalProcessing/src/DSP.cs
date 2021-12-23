@@ -283,6 +283,7 @@ namespace DigitalSignalProcessing
         public static double[] Step(int M, double magnitude = 1, int delay = 0)
         {
             GuardClauses.IsOutOfBounds(nameof(Step), nameof(delay), nameof(M), delay, M);
+            GuardClauses.IsLessThan(nameof(Step), nameof(M), M, 0);
 
             double[] step = new double[M];
 

@@ -569,5 +569,50 @@ namespace DigitalSignalProcessingTests
 
             Assert.AreEqual(delay, sampleIndex, "Impulse delay was not correct.");
         }
+
+        [TestMethod]
+        public void TestStep_OutputLength()
+        {
+            int M = 32;
+            double[] step = DSP.Step(M);
+            Assert.AreEqual(M, step.Length, "Step sequence output length was incorrect.");
+        }
+
+        [TestMethod]
+        public void TestStep_OutputMagnitude()
+        {
+            int M = 32;
+            double magnitude = 2;
+            int delay = 0;
+            double[] step = DSP.Step(M, magnitude, delay);
+            double maxVal = double.MinValue;
+
+            for(int i = 0; i < step.Length; i++)
+            {
+                if(step[i] > maxVal)
+                {
+                    maxVal = step[i];
+                }
+            }
+
+            Assert.AreEqual(magnitude, maxVal, 0.01, "Step sequence magnitude was incorrect.");
+        }
+
+        [TestMethod]
+        public void TestStep_OutputDelay()
+        {
+            int M = 32;
+            double magnitude = 2;
+            int delay = 8;
+            double[] step = DSP.Step(M, magnitude, delay);
+            int zeroSamples = 0;
+
+            for (int i = 0; i < step.Length; i++)
+            {
+                if(step[i] == 0) { zeroSamples++; }
+            }
+
+            Assert.AreEqual(delay, zeroSamples, "Step sequence delay was incorrect.");
+        }
     }
 }
