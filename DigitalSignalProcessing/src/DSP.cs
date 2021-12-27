@@ -423,5 +423,21 @@ namespace DigitalSignalProcessing
 
             return xPhase;
         }
+
+        /// <summary>
+        /// Pads a sequence with zeros so that the returned sequence has a length of newLength.
+        /// </summary>
+        public static double[] ZeroPad(double[] x, int newLength)
+        {
+            GuardClauses.IsLessThan(nameof(ZeroPad), nameof(newLength), newLength, x.Length);
+            double[] padded = new double[newLength];
+
+            for(int i = 0; i < x.Length; i++)
+            {
+                padded[i] = x[i];
+            }
+
+            return padded;
+        }
     }
 }
