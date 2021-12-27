@@ -5,6 +5,7 @@ Sources:
 - [The Scientist and Engineer's Guide to Digital Signal Processing](https://www.analog.com/en/education/education-library/scientist_engineers_guide.html#Foundations)
 - [Optimizing 1D Convolution](https://stackoverflow.com/questions/7237907/1d-fast-convolution-without-fft)
 - [Discrete Fourier Transform](https://en.wikipedia.org/wiki/Discrete_Fourier_transform)
+- [Cooley-Tukey Fast Fourier Transform](https://en.wikipedia.org/wiki/Cooley%E2%80%93Tukey_FFT_algorithm)
 
 Most of the algorithms will come from the textbook listed in the sources.
 
@@ -20,3 +21,13 @@ The values for i range from 0 to L - 1. A quick glance at this algorithm will sh
 <p align="center">
     <img src="https://latex.codecogs.com/svg.latex?y[i]&space;=&space;\begin{cases}&space;&&space;\text{&space;if&space;}&space;0&space;\leq&space;i<&space;M-1&space;\text{&space;,&space;}\sum_{j=0}^{i}h[j]x[i-j]\\&space;&&space;\text{&space;if&space;}&space;M-1\leq&space;i<&space;L-M&plus;1\text{&space;,&space;}&space;\sum_{j=0}^{M-1}h[j]x[i-j]&space;\\&space;&&space;\text{&space;if&space;}&space;L-M&plus;1\leq&space;i<L\text{&space;,&space;}\sum_{j=i-L&plus;M}^{M-1}h[j]x[i-j]&space;\end{cases}" title="y[i] = \begin{cases} & \text{ if } 0 \leq i< M-1 \text{ , }\sum_{j=0}^{i}h[j]x[i-j]\\ & \text{ if } M-1\leq i< L-M+1\text{ , } \sum_{j=0}^{M-1}h[j]x[i-j] \\ & \text{ if } L-M+1\leq i<L\text{ , }\sum_{j=i-L+M}^{M-1}h[j]x[i-j] \end{cases}" />
 </p>
+
+## Common Sequences and Windows
+
+## Discrete Fourier Transform (DFT)
+
+## Fast Fourier Transform (FFT)
+
+## Finite Impulse Response (FIR) Filters
+
+## Infinite Impulse Response (IIR) Filters
