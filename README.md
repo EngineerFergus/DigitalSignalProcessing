@@ -6,6 +6,7 @@ Sources:
 - [Optimizing 1D Convolution](https://stackoverflow.com/questions/7237907/1d-fast-convolution-without-fft)
 - [Discrete Fourier Transform](https://en.wikipedia.org/wiki/Discrete_Fourier_transform)
 - [Cooley-Tukey Fast Fourier Transform](https://en.wikipedia.org/wiki/Cooley%E2%80%93Tukey_FFT_algorithm)
+- [Calculating inverse FFT from forward FFT](https://flylib.com/books/en/2.729.1/computing_the_inverse_fft_using_the_forward_fft.html)
 
 Most of the algorithms will come from the textbook listed in the sources.
 
@@ -22,7 +23,9 @@ The values for i range from 0 to L - 1. A quick glance at this algorithm will sh
     <img src="https://latex.codecogs.com/svg.latex?y[i]&space;=&space;\begin{cases}&space;&&space;\text{&space;if&space;}&space;0&space;\leq&space;i<&space;M-1&space;\text{&space;,&space;}\sum_{j=0}^{i}h[j]x[i-j]\\&space;&&space;\text{&space;if&space;}&space;M-1\leq&space;i<&space;L-M&plus;1\text{&space;,&space;}&space;\sum_{j=0}^{M-1}h[j]x[i-j]&space;\\&space;&&space;\text{&space;if&space;}&space;L-M&plus;1\leq&space;i<L\text{&space;,&space;}\sum_{j=i-L&plus;M}^{M-1}h[j]x[i-j]&space;\end{cases}" title="y[i] = \begin{cases} & \text{ if } 0 \leq i< M-1 \text{ , }\sum_{j=0}^{i}h[j]x[i-j]\\ & \text{ if } M-1\leq i< L-M+1\text{ , } \sum_{j=0}^{M-1}h[j]x[i-j] \\ & \text{ if } L-M+1\leq i<L\text{ , }\sum_{j=i-L+M}^{M-1}h[j]x[i-j] \end{cases}" />
 </p>
 
-## Common Sequences and Windows
+## Common Sequences
+
+## Common Windows
 
 ## Discrete Fourier Transform (DFT)
 
