@@ -199,6 +199,52 @@ namespace DigitalSignalProcessingTests
         }
 
         [TestMethod]
+        public void TestInterlacedDecompose_xEOutputLength()
+        {
+            double[] x = new double[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            double[] xE, xO;
+            (xE, xO) = DSP.InterlacedDecompose(x);
+
+            Assert.AreEqual(x.Length / 2, xE.Length);
+        }
+
+        [TestMethod]
+        public void TestInterlacedDecompose_xOOutputLength()
+        {
+            double[] x = new double[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            double[] xE, xO;
+            (xE, xO) = DSP.InterlacedDecompose(x);
+
+            Assert.AreEqual(x.Length / 2, xO.Length);
+        }
+
+        [TestMethod]
+        public void TestInterlacedDecompose_xEOutputValues()
+        {
+            double[] x = new double[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            double[] xE;
+            (xE, _) = DSP.InterlacedDecompose(x);
+
+            for(int i = 0; i < x.Length / 2; i++)
+            {
+                Assert.AreEqual(x[2 * i], xE[i]);
+            }
+        }
+
+        [TestMethod]
+        public void TestInterlacedDecompose_xOOutputValues()
+        {
+            double[] x = new double[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            double[] xO;
+            (_, xO) = DSP.InterlacedDecompose(x);
+
+            for (int i = 0; i < x.Length / 2; i++)
+            {
+                Assert.AreEqual(x[2 * i + 1], xO[i]);
+            }
+        }
+
+        [TestMethod]
         public void TestNaiveConv_OutputLength()
         {
             double[] x = new double[] { 1, 2, 3, 4, 5 };

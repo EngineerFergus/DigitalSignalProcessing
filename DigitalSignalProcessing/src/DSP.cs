@@ -138,6 +138,25 @@ namespace DigitalSignalProcessing
         }
 
         /// <summary>
+        /// Decomposes a sequence into it's even and odd samples.
+        /// </summary>
+        public static (double[] xE, double[] xO) InterlacedDecompose(double[] x)
+        {
+            GuardClauses.IsOdd(nameof(InterlacedDecompose), $"Length of {nameof(x)}", x.Length);
+
+            double[] xE = new double[x.Length / 2];
+            double[] xO = new double[x.Length / 2];
+
+            for (int i = 0; i < x.Length / 2; i++)
+            {
+                xE[i] = x[2 * i];
+                xO[i] = x[2 * i + 1];
+            }
+
+            return (xE, xO);
+        }
+
+        /// <summary>
         /// Convolves a signal x with kernel h. Output length is length of x plus length of h minus 1.
         /// </summary>
         public static double[] NaiveConv(double[] x, double[] h)
