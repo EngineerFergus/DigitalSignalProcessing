@@ -157,6 +157,25 @@ namespace DigitalSignalProcessing
         }
 
         /// <summary>
+        /// Decomposes a sequence into it's even and odd samples.
+        /// </summary>
+        public static (Complex[] xE, Complex[] xO) InterlacedDecompose(Complex[] x)
+        {
+            GuardClauses.IsOdd(nameof(InterlacedDecompose), $"Length of {nameof(x)}", x.Length);
+
+            Complex[] xE = new Complex[x.Length / 2];
+            Complex[] xO = new Complex[x.Length / 2];
+
+            for (int i = 0; i < x.Length / 2; i++)
+            {
+                xE[i] = x[2 * i];
+                xO[i] = x[2 * i + 1];
+            }
+
+            return (xE, xO);
+        }
+
+        /// <summary>
         /// Convolves a signal x with kernel h. Output length is length of x plus length of h minus 1.
         /// </summary>
         public static double[] NaiveConv(double[] x, double[] h)
@@ -444,6 +463,40 @@ namespace DigitalSignalProcessing
         }
 
         /// <summary>
+        /// Extracts the real part of a complex sequence.
+        /// </summary>
+        public static double[] Real(Complex[] x)
+        {
+            double[] re = new double[x.Length];
+
+            for(int i = 0; i < x.Length; i++)
+            {
+                re[i] = x[i].Real;
+            }
+
+            return re;
+        }
+
+        /// <summary>
+        /// Returns a new complex value where the real and imaginary terms are swapped from the original value x.
+        /// </summary>
+        public static Complex SwapComplex(Complex x)
+        {
+            return new Complex(x.Imaginary, x.Real);
+        }
+
+        /// <summary>
+        /// Swaps the real and imaginary components of every complex value in a complex sequence in place.
+        /// </summary>
+        public static void SwapComplex(ref Complex[] x)
+        {
+            for(int i = 0; i < x.Length; i++)
+            {
+                x[i] = SwapComplex(x[i]);
+            }
+        }
+
+        /// <summary>
         /// Converts a real sequence to a complex sequence whose real values equal the original sequence and all complex 
         /// values equal zero.
         /// </summary>
@@ -476,6 +529,22 @@ namespace DigitalSignalProcessing
         }
 
         /// <summary>
+        /// Pads a sequence with zeros so that the returned sequence has a length of newLength.
+        /// </summary>
+        public static Complex[] ZeroPad(Complex[] x, int newLength)
+        {
+            GuardClauses.IsLessThan(nameof(ZeroPad), nameof(newLength), newLength, x.Length);
+            Complex[] padded = new Complex[newLength];
+
+            for(int i = 0; i < x.Length; i++)
+            {
+                padded[i] = x[i];
+            }
+
+            return padded;
+        }
+
+        /// <summary>
         /// Returns the next largest power of two given an unsigned integer x.
         /// </summary>
         public static int NextLargestPowerOfTwo(int x)
@@ -496,9 +565,69 @@ namespace DigitalSignalProcessing
             return output;
         }
 
+        /// <summary>
+        /// Performs a Fast Fourier Transform on an input sequence x
+        /// </summary>
         public static Complex[] FFT(Complex[] x)
         {
-            throw new NotImplementedException();
+            int powTwo = NextLargestPowerOfTwo(x.Length);
+            if(powTwo != x.Length)
+            {
+                x = ZeroPad(x, powTwo);
+            }
+
+            Complex[] f = DitFft(x);
+
+            return f;
+        }
+
+        /// <summary>
+        /// Performs a decimation in time Fast Fourier Transform as described by the Cooley-Tukey algorithm.
+        /// Assumes the input has a length that is a power of two.
+        /// </summary>
+        private static Complex[] DitFft(Complex[] x)
+        {
+            int N = x.Length;
+            Complex[] xOut = new Complex[N];
+
+            if (N == 1) { xOut[0] = x[0]; }
+            else
+            {
+                Complex[] xE, xO;
+                (xE, xO) = InterlacedDecompose(x);
+                xE = DitFft(xE);
+                xO = DitFft(xO);
+
+                for (int k = 0; k < N / 2; k++)
+                {
+                    Complex p = xE[k];
+                    Complex q = Complex.Exp(-2 * Math.PI * Complex.ImaginaryOne * k / N) * xO[k];
+                    xOut[k] = p + q;
+                    xOut[k + N / 2] = p - q;
+                }
+            }
+
+            return xOut;
+        }
+
+        /// <summary>
+        /// Computes the inverse Fast Fourier Transform of a complex sequence x.
+        /// </summary>
+        public static Complex[] IFFT(Complex[] x)
+        {
+            Complex[] xInverse = new Complex[x.Length];
+            Array.Copy(x, xInverse, x.Length);
+
+            SwapComplex(ref xInverse);
+            xInverse = FFT(xInverse);
+            SwapComplex(ref xInverse);
+
+            for(int i = 0; i < xInverse.Length; i++)
+            {
+                xInverse[i] /= xInverse.Length;
+            }
+
+            return xInverse;
         }
     }
 }
