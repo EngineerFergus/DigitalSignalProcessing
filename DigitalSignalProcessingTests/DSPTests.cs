@@ -1,6 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using DigitalSignalProcessing;
 using System.Linq;
+using System;
 
 namespace DigitalSignalProcessingTests
 {
@@ -706,6 +707,13 @@ namespace DigitalSignalProcessingTests
         }
 
         [TestMethod]
+        public void TestNextLargestPowerOfTwo_FourInput()
+        {
+            int pow = DSP.NextLargestPowerOfTwo(4);
+            Assert.AreEqual(4, pow);
+        }
+
+        [TestMethod]
         public void TestNextLargestPowerOfTwo_ThirtyOneInput()
         {
             int pow = DSP.NextLargestPowerOfTwo(31);
@@ -736,8 +744,7 @@ namespace DigitalSignalProcessingTests
         [TestMethod]
         public void TestNextLargestPowerOfTwo_LargestInput()
         {
-            int pow = DSP.NextLargestPowerOfTwo(int.MaxValue - 1000);
-            Assert.AreEqual(int.MaxValue, pow);
+            Assert.ThrowsException<OverflowException>(() => DSP.NextLargestPowerOfTwo(int.MaxValue));
         }
     }
 }

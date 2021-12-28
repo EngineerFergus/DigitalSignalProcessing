@@ -480,22 +480,18 @@ namespace DigitalSignalProcessing
         /// </summary>
         public static int NextLargestPowerOfTwo(int x)
         {
-            int numActive = 0;
-            int largestBit = 0;
+            int output = 1;
 
-            for(int i = 0; i < 32; i++)
+            for(int i = 0; i < 30; i++)
             {
-                if((x & (1 << i)) != 0)
-                {
-                    largestBit = i;
-                    numActive++;
-                }
+                if(output >= x) { return output; }
+                output <<= 1;
             }
 
-            if(numActive > 1) { largestBit++; }
-
-            int output = 1 << largestBit;
-            output &= 0b_0111_1111_1111_1111_1111_1111_1111_1111;
+            if(output < x)
+            {
+                throw new OverflowException("Next power of two is outside computational limits.");
+            }
 
             return output;
         }
