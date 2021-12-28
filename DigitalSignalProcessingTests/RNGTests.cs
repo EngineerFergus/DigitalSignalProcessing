@@ -9,9 +9,8 @@ namespace DigitalSignalProcessingTests
         [TestMethod]
         public void TestSampleNormDist_OutputMean()
         {
-            int N = 512;
+            int N = 1024;
             double mean = 0;
-            double std = 1;
             double[] samples = new double[N];
             for(int i = 0; i < N; i++)
             {
@@ -26,8 +25,7 @@ namespace DigitalSignalProcessingTests
         [TestMethod]
         public void TestSampleNormDist_OutputStd()
         {
-            int N = 512;
-            double mean = 0;
+            int N = 1024;
             double std = 1;
             double[] samples = new double[N];
             for (int i = 0; i < N; i++)

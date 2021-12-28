@@ -12,7 +12,7 @@ namespace DigitalSignalProcessingTests
         {
             double[] data = new double[] { 1, 2, 3, 3, 9, 10 };
             (double mean, double std) = DSP.CalcMeanStd(data);
-            Assert.AreEqual(4.667, mean, 0.001, "Mean was not within tolerance.");
+            Assert.AreEqual(4.667, mean, 0.001);
         }
 
         [TestMethod]
@@ -20,7 +20,7 @@ namespace DigitalSignalProcessingTests
         {
             double[] data = new double[] { 1, 2, 3, 3, 9, 10 };
             (double mean, double std) = DSP.CalcMeanStd(data);
-            Assert.AreEqual(3.83, std, 0.01, "Standard deviation was not within tolerance.");
+            Assert.AreEqual(3.83, std, 0.01);
         }
 
         [TestMethod]
@@ -28,7 +28,7 @@ namespace DigitalSignalProcessingTests
         {
             int[] data = new int[] { 1, 2, 3, 3, 9, 10 };
             (double mean, double std) = DSP.CalcMeanStd(data);
-            Assert.AreEqual(4.667, mean, 0.001, "Mean was not within tolerance.");
+            Assert.AreEqual(4.667, mean, 0.001);
         }
 
         [TestMethod]
@@ -36,7 +36,7 @@ namespace DigitalSignalProcessingTests
         {
             int[] data = new int[] { 1, 2, 3, 3, 9, 10 };
             (double mean, double std) = DSP.CalcMeanStd(data);
-            Assert.AreEqual(3.83, std, 0.01, "Standard deviation was not within tolerance.");
+            Assert.AreEqual(3.83, std, 0.01);
         }
 
         [TestMethod]
@@ -45,7 +45,7 @@ namespace DigitalSignalProcessingTests
             int[] dataOne = new int[] { -4, -4, -3, -1, -1, -1, 0, 0, 0, 1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5 };
             int[] trueHist = new int[] { 2, 1, 0, 3, 3, 1, 2, 3, 4, 5 };
             (int[] hist, int lowVal, int highVal) = DSP.CalcHist(dataOne);
-            Assert.AreEqual(-4, lowVal, "Low values of histogram did not match.");
+            Assert.AreEqual(-4, lowVal);
         }
 
         [TestMethod]
@@ -55,7 +55,7 @@ namespace DigitalSignalProcessingTests
             int[] trueHist = new int[] { 2, 1, 0, 3, 3, 1, 2, 3, 4, 5 };
 
             (int[] hist, int lowVal, int highVal) = DSP.CalcHist(dataOne);
-            Assert.AreEqual(5, highVal, "High values of histogram did not match.");
+            Assert.AreEqual(5, highVal);
             }
 
         [TestMethod]
@@ -64,7 +64,7 @@ namespace DigitalSignalProcessingTests
             int[] dataOne = new int[] { -4, -4, -3, -1, -1, -1, 0, 0, 0, 1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5 };
             int[] trueHist = new int[] { 2, 1, 0, 3, 3, 1, 2, 3, 4, 5 };
             (int[] hist, int lowVal, int highVal) = DSP.CalcHist(dataOne);
-            Assert.AreEqual(trueHist.Length, hist.Length, "Histogram lengths were not equal.");
+            Assert.AreEqual(trueHist.Length, hist.Length);
         }
 
         [TestMethod]
@@ -72,7 +72,7 @@ namespace DigitalSignalProcessingTests
         {
             int[] dataOne = new int[] { -4, -4, -3, -1, -1, -1, 0, 0, 0, 1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5 };
             (int[] hist, int lowVal, int highVal) = DSP.CalcHist(dataOne);
-            Assert.AreEqual(dataOne.Length, hist.Sum(), "Histogram sum did not equal total length of data.");
+            Assert.AreEqual(dataOne.Length, hist.Sum());
         }
 
         [TestMethod]
@@ -84,7 +84,7 @@ namespace DigitalSignalProcessingTests
             (int[] hist, int lowVal, int highVal) = DSP.CalcHist(dataOne);
             for (int i = 0; i < hist.Length; i++)
             {
-                Assert.AreEqual(hist[i], trueHist[i], "Histogram bin count did not match.");
+                Assert.AreEqual(hist[i], trueHist[i]);
             }
         }
 
@@ -94,7 +94,7 @@ namespace DigitalSignalProcessingTests
             double[] data = new double[] { 0, 0.1, 0.1, 1.1, 1.1, 1.1, 2.1, 2.1, 2.1, 3.1, 3.1, 3.1, 4.1, 4.1, 4.1, 5.1, 6.1, 7.1, 8.1, 9.1, 10 };
             int[] trueHist = new int[] { 3, 3, 3, 3, 3, 1, 1, 1, 1, 2 };
             (int[] hist, double low, double high) = DSP.CalcHist(data, 10);
-            Assert.AreEqual(0, low, 0.01, "Low values did not match");
+            Assert.AreEqual(0, low, 0.01);
         }
 
         [TestMethod]
@@ -103,7 +103,7 @@ namespace DigitalSignalProcessingTests
             double[] data = new double[] { 0, 0.1, 0.1, 1.1, 1.1, 1.1, 2.1, 2.1, 2.1, 3.1, 3.1, 3.1, 4.1, 4.1, 4.1, 5.1, 6.1, 7.1, 8.1, 9.1, 10 };
             int[] trueHist = new int[] { 3, 3, 3, 3, 3, 1, 1, 1, 1, 2 };
             (int[] hist, double low, double high) = DSP.CalcHist(data, 10);
-            Assert.AreEqual(10, high, 0.01, "High values did not match");
+            Assert.AreEqual(10, high, 0.01);
         }
 
         [TestMethod]
@@ -112,7 +112,7 @@ namespace DigitalSignalProcessingTests
             double[] data = new double[] { 0, 0.1, 0.1, 1.1, 1.1, 1.1, 2.1, 2.1, 2.1, 3.1, 3.1, 3.1, 4.1, 4.1, 4.1, 5.1, 6.1, 7.1, 8.1, 9.1, 10 };
             int[] trueHist = new int[] { 3, 3, 3, 3, 3, 1, 1, 1, 1, 2 };
             (int[] hist, double low, double high) = DSP.CalcHist(data, 10);
-            Assert.AreEqual(trueHist.Length, hist.Length, "Histogram lengths did not match.");
+            Assert.AreEqual(trueHist.Length, hist.Length);
         }
 
         [TestMethod]
@@ -121,7 +121,7 @@ namespace DigitalSignalProcessingTests
             double[] data = new double[] { 0, 0.1, 0.1, 1.1, 1.1, 1.1, 2.1, 2.1, 2.1, 3.1, 3.1, 3.1, 4.1, 4.1, 4.1, 5.1, 6.1, 7.1, 8.1, 9.1, 10 };
             int[] trueHist = new int[] { 3, 3, 3, 3, 3, 1, 1, 1, 1, 2 };
             (int[] hist, double low, double high) = DSP.CalcHist(data, 10);
-            Assert.AreEqual(data.Length, hist.Sum(), "Total count within histogram did not match ");
+            Assert.AreEqual(data.Length, hist.Sum());
         }
 
         [TestMethod]
@@ -133,7 +133,7 @@ namespace DigitalSignalProcessingTests
 
             for (int i = 0; i < hist.Length; i++)
             {
-                Assert.AreEqual(trueHist[i], hist[i], $"Histogram bin {i + 1} count did not match");
+                Assert.AreEqual(trueHist[i], hist[i]);
             }
         }
 
@@ -142,7 +142,7 @@ namespace DigitalSignalProcessingTests
         {
             double[] data = new double[] { 1, 2, 3, 4, 3, 7, 1, 2, 8, 10 };
             double[] evenDecomp = DSP.EvenDecompose(data);
-            Assert.AreEqual(data.Length, evenDecomp.Length, "Length of even decomposition did not equal original signal length.");
+            Assert.AreEqual(data.Length, evenDecomp.Length);
         }
 
         [TestMethod]
@@ -151,7 +151,7 @@ namespace DigitalSignalProcessingTests
             double[] data = new double[] { 1, 2, 3, 4, 3, 7, 1, 2, 8, 10 };
             double[] evenDecomp = DSP.EvenDecompose(data);
             int N = data.Length;
-            Assert.AreEqual(data[0], evenDecomp[0], 0.01, "First sample in even decomposition did not equal first sample of data.");
+            Assert.AreEqual(data[0], evenDecomp[0], 0.01);
         }
 
         [TestMethod]
@@ -163,7 +163,7 @@ namespace DigitalSignalProcessingTests
             for (int i = 1; i < data.Length / 2; i++)
             {
                 int j = N - i;
-                Assert.AreEqual(evenDecomp[i], evenDecomp[j], 0.01, $"Even decomposition signal not even symmetric at point {i} and {j}.");
+                Assert.AreEqual(evenDecomp[i], evenDecomp[j], 0.01);
             }
         }
 
@@ -173,7 +173,7 @@ namespace DigitalSignalProcessingTests
             double[] data = new double[] { 1, 2, 3, 4, 3, 7, 1, 2, 8, 10 };
             double[] oddDecomp = DSP.OddDecompose(data);
             int N = data.Length;
-            Assert.AreEqual(data.Length, oddDecomp.Length, "Length of odd decomposition did not equal original signal length.");
+            Assert.AreEqual(data.Length, oddDecomp.Length);
         }
 
         [TestMethod]
@@ -182,7 +182,7 @@ namespace DigitalSignalProcessingTests
             double[] data = new double[] { 1, 2, 3, 4, 3, 7, 1, 2, 8, 10 };
             double[] oddDecomp = DSP.OddDecompose(data);
             int N = data.Length;
-            Assert.AreEqual(0, oddDecomp[0], 0.01, "First sample in odd decomposition did not equal to zero.");
+            Assert.AreEqual(0, oddDecomp[0], 0.01);
         }
 
         [TestMethod]
@@ -194,7 +194,7 @@ namespace DigitalSignalProcessingTests
             for (int i = 1; i < oddDecomp.Length / 2; i++)
             {
                 int j = N - i;
-                Assert.AreEqual(-oddDecomp[i], oddDecomp[j], $"Odd decomposition signal not odd symmetric at point {i} and {j}.");
+                Assert.AreEqual(-oddDecomp[i], oddDecomp[j]);
             }
         }
 
@@ -251,7 +251,7 @@ namespace DigitalSignalProcessingTests
             double[] h = new double[] { 1, 1, 1 };
             double[] y = DSP.NaiveConv(x, h);
             int lTrue = x.Length + h.Length - 1;
-            Assert.AreEqual(lTrue, y.Length, "Output of NaiveConv length was not correct.");
+            Assert.AreEqual(lTrue, y.Length);
         }
 
         [TestMethod]
@@ -264,7 +264,7 @@ namespace DigitalSignalProcessingTests
 
             for(int i = 0; i < y.Length; i++)
             {
-                Assert.AreEqual(yTrue[i], y[i], 0.01, $"Convolution output at {i} was not correct.");
+                Assert.AreEqual(yTrue[i], y[i], 0.01);
             }
         }
 
@@ -275,7 +275,7 @@ namespace DigitalSignalProcessingTests
             double[] h = new double[] { 1, 1, 1 };
             double[] y = DSP.NaiveConv(x, h);
             int lTrue = x.Length + h.Length - 1;
-            Assert.AreEqual(lTrue, y.Length, "Output from even x input of naive conolution did not have correct length.");
+            Assert.AreEqual(lTrue, y.Length);
         }
 
         [TestMethod]
@@ -285,7 +285,7 @@ namespace DigitalSignalProcessingTests
             double[] h = new double[] { 1, 1, 1, 1 };
             double[] y = DSP.NaiveConv(x, h);
             int lTrue = x.Length + h.Length - 1;
-            Assert.AreEqual(lTrue, y.Length, "Output from even x input of naive conolution did not have correct length.");
+            Assert.AreEqual(lTrue, y.Length);
         }
 
         [TestMethod]
@@ -295,7 +295,7 @@ namespace DigitalSignalProcessingTests
             double[] h = new double[] { 1, 1, 1, 1 };
             double[] y = DSP.NaiveConv(x, h);
             int lTrue = x.Length + h.Length - 1;
-            Assert.AreEqual(lTrue, y.Length, "Output from even x input of naive conolution did not have correct length.");
+            Assert.AreEqual(lTrue, y.Length);
         }
 
         [TestMethod]
@@ -308,7 +308,7 @@ namespace DigitalSignalProcessingTests
 
             for(int i = 0; i < y.Length; i++)
             {
-                Assert.AreEqual(yTrue[i], y[i], 0.01, $"Incorrect value at location {i}.");
+                Assert.AreEqual(yTrue[i], y[i], 0.01);
             }
         }
 
@@ -322,7 +322,7 @@ namespace DigitalSignalProcessingTests
 
             for(int i = 0; i < y.Length; i++)
             {
-                Assert.AreEqual(yTrue[i], y[i], 0.01, $"Incorrect value at location {i}.");
+                Assert.AreEqual(yTrue[i], y[i], 0.01);
             }
         }
 
@@ -336,7 +336,7 @@ namespace DigitalSignalProcessingTests
 
             for(int i = 0; i < y.Length; i++)
             {
-                Assert.AreEqual(yTrue[i], y[i], 0.01, $"Incorrect value at location {i}.");
+                Assert.AreEqual(yTrue[i], y[i], 0.01);
             }
         }
 
@@ -347,7 +347,7 @@ namespace DigitalSignalProcessingTests
             double[] h = new double[] { 1, 1, 1 };
             double[] y = DSP.OptimConv(x, h);
             int lTrue = x.Length + h.Length - 1;
-            Assert.AreEqual(lTrue, y.Length, "Output of NaiveConv length was not correct.");
+            Assert.AreEqual(lTrue, y.Length);
         }
 
         [TestMethod]
@@ -360,10 +360,9 @@ namespace DigitalSignalProcessingTests
 
             for (int i = 0; i < y.Length; i++)
             {
-                Assert.AreEqual(yTrue[i], y[i], 0.01, $"Convolution output at {i} was not correct.");
+                Assert.AreEqual(yTrue[i], y[i], 0.01);
             }
         }
-
 
         [TestMethod]
         public void TestOptimConv_EvenXInput_OutputLength()
@@ -372,7 +371,7 @@ namespace DigitalSignalProcessingTests
             double[] h = new double[] { 1, 1, 1 };
             double[] y = DSP.OptimConv(x, h);
             int lTrue = x.Length + h.Length - 1;
-            Assert.AreEqual(lTrue, y.Length, "Output from even x input of naive conolution did not have correct length.");
+            Assert.AreEqual(lTrue, y.Length);
         }
 
         [TestMethod]
@@ -382,7 +381,7 @@ namespace DigitalSignalProcessingTests
             double[] h = new double[] { 1, 1, 1, 1 };
             double[] y = DSP.OptimConv(x, h);
             int lTrue = x.Length + h.Length - 1;
-            Assert.AreEqual(lTrue, y.Length, "Output from even x input of naive conolution did not have correct length.");
+            Assert.AreEqual(lTrue, y.Length);
         }
 
         [TestMethod]
@@ -392,7 +391,7 @@ namespace DigitalSignalProcessingTests
             double[] h = new double[] { 1, 1, 1, 1 };
             double[] y = DSP.OptimConv(x, h);
             int lTrue = x.Length + h.Length - 1;
-            Assert.AreEqual(lTrue, y.Length, "Output from even x input of naive conolution did not have correct length.");
+            Assert.AreEqual(lTrue, y.Length);
         }
 
         [TestMethod]
@@ -405,7 +404,7 @@ namespace DigitalSignalProcessingTests
 
             for (int i = 0; i < y.Length; i++)
             {
-                Assert.AreEqual(yTrue[i], y[i], 0.01, $"Incorrect value at location {i}.");
+                Assert.AreEqual(yTrue[i], y[i], 0.01);
             }
         }
 
@@ -419,7 +418,7 @@ namespace DigitalSignalProcessingTests
 
             for (int i = 0; i < y.Length; i++)
             {
-                Assert.AreEqual(yTrue[i], y[i], 0.01, $"Incorrect value at location {i}.");
+                Assert.AreEqual(yTrue[i], y[i], 0.01);
             }
         }
 
@@ -433,7 +432,7 @@ namespace DigitalSignalProcessingTests
 
             for (int i = 0; i < y.Length; i++)
             {
-                Assert.AreEqual(yTrue[i], y[i], 0.01, $"Incorrect value at location {i}.");
+                Assert.AreEqual(yTrue[i], y[i], 0.01);
             }
         }
 
@@ -442,7 +441,7 @@ namespace DigitalSignalProcessingTests
         {
             int M = 32;
             double[] ham = DSP.Hamming(M);
-            Assert.AreEqual(M, ham.Length, "Hamming window sequence length was incorrect.");
+            Assert.AreEqual(M, ham.Length);
         }
 
         [TestMethod]
@@ -454,7 +453,7 @@ namespace DigitalSignalProcessingTests
 
             for(int i = 0; i < ham.Length; i++)
             {
-                Assert.AreEqual(trueHam[i], ham[i], 0.0001, $"Hamming sequence incorrect at location {i}.");
+                Assert.AreEqual(trueHam[i], ham[i], 0.0001);
             }
         }
 
@@ -463,7 +462,7 @@ namespace DigitalSignalProcessingTests
         {
             int M = 32;
             double[] blackman = DSP.Blackman(M);
-            Assert.AreEqual(M, blackman.Length, "Blackman window sequence length was incorrect.");
+            Assert.AreEqual(M, blackman.Length);
         }
 
         [TestMethod]
@@ -475,7 +474,7 @@ namespace DigitalSignalProcessingTests
 
             for (int i = 0; i < blackman.Length; i++)
             {
-                Assert.AreEqual(trueBlackman[i], blackman[i], 0.0001, $"Blackman sequence incorrect at location {i}.");
+                Assert.AreEqual(trueBlackman[i], blackman[i], 0.0001);
             }
         }
 
@@ -484,7 +483,7 @@ namespace DigitalSignalProcessingTests
         {
             int M = 32;
             double[] rectangleWindow = DSP.Rectangle(M, 10);
-            Assert.AreEqual(M, rectangleWindow.Length, "Rectangle window sequence length was incorrect.");
+            Assert.AreEqual(M, rectangleWindow.Length);
         }
 
         [TestMethod]
@@ -504,7 +503,7 @@ namespace DigitalSignalProcessingTests
                 }
             }
 
-            Assert.AreEqual(magnitude, maxVal, 0.01, "Magnitude of rectangle window was incorrect.");
+            Assert.AreEqual(magnitude, maxVal, 0.01);
         }
 
         [TestMethod]
@@ -526,7 +525,7 @@ namespace DigitalSignalProcessingTests
                 }
             }
 
-            Assert.AreEqual(delay, delaySample, "Delay sample was not correct in Rectangle sequence.");
+            Assert.AreEqual(delay, delaySample);
         }
 
         [TestMethod]
@@ -544,7 +543,7 @@ namespace DigitalSignalProcessingTests
                 if(rectangleWindow[i] != 0) { nonZeroSamples++; }
             }
 
-            Assert.AreEqual(L, nonZeroSamples, $"Rectangle window size was incorrect.");
+            Assert.AreEqual(L, nonZeroSamples);
         }
 
         [TestMethod]
@@ -562,7 +561,7 @@ namespace DigitalSignalProcessingTests
                 if (rectangleWindow[i] != 0) { nonZeroSamples++; }
             }
 
-            Assert.AreEqual(L, nonZeroSamples, $"Rectangle window size was incorrect.");
+            Assert.AreEqual(L, nonZeroSamples);
         }
 
         [TestMethod]
@@ -572,7 +571,7 @@ namespace DigitalSignalProcessingTests
             double mag = 1;
             int delay = 0;
             double[] impulse = DSP.Impulse(M, mag, delay);
-            Assert.AreEqual(M, impulse.Length, "Impulse length was not correct.");
+            Assert.AreEqual(M, impulse.Length);
         }
 
         [TestMethod]
@@ -592,7 +591,7 @@ namespace DigitalSignalProcessingTests
                 }
             }
 
-            Assert.AreEqual(mag, max, 0.01, "Impulse magnitude was not correct.");
+            Assert.AreEqual(mag, max, 0.01);
         }
 
         [TestMethod]
@@ -613,7 +612,7 @@ namespace DigitalSignalProcessingTests
                 }
             }
 
-            Assert.AreEqual(delay, sampleIndex, "Impulse delay was not correct.");
+            Assert.AreEqual(delay, sampleIndex);
         }
 
         [TestMethod]
@@ -621,7 +620,7 @@ namespace DigitalSignalProcessingTests
         {
             int M = 32;
             double[] step = DSP.Step(M);
-            Assert.AreEqual(M, step.Length, "Step sequence output length was incorrect.");
+            Assert.AreEqual(M, step.Length);
         }
 
         [TestMethod]
@@ -641,7 +640,7 @@ namespace DigitalSignalProcessingTests
                 }
             }
 
-            Assert.AreEqual(magnitude, maxVal, 0.01, "Step sequence magnitude was incorrect.");
+            Assert.AreEqual(magnitude, maxVal, 0.01);
         }
 
         [TestMethod]
@@ -658,7 +657,7 @@ namespace DigitalSignalProcessingTests
                 if(step[i] == 0) { zeroSamples++; }
             }
 
-            Assert.AreEqual(delay, zeroSamples, "Step sequence delay was incorrect.");
+            Assert.AreEqual(delay, zeroSamples);
         }
 
         [TestMethod]
@@ -667,7 +666,7 @@ namespace DigitalSignalProcessingTests
             double[] x = new double[] { 1, 2, 3, 4, 5, 4, 3, 2, 1 };
             int boxSize = 3;
             double[] y = DSP.AverageFilter(x, boxSize);
-            Assert.AreEqual(x.Length, y.Length, "Average filter output length was incorrect.");
+            Assert.AreEqual(x.Length, y.Length);
         }
 
         [TestMethod]
@@ -680,7 +679,7 @@ namespace DigitalSignalProcessingTests
 
             for(int i = 0; i < y.Length; i++)
             {
-                Assert.AreEqual(yTrue[i], y[i], 0.01, $"Average filter output incorrect at location {i}.");
+                Assert.AreEqual(yTrue[i], y[i], 0.01);
             }
         }
 
@@ -690,6 +689,55 @@ namespace DigitalSignalProcessingTests
             double[] x = new double[] { 1, 2, 3, 4, 10, 10, 4, 3, 2, 1 };
             int boxSize = 9;
             double[] y = DSP.AverageFilter(x, boxSize);
+        }
+
+        [TestMethod]
+        public void TestNextLargestPowerOfTwo_ZeroInput()
+        {
+            int pow = DSP.NextLargestPowerOfTwo(0);
+            Assert.AreEqual(1, pow);
+        }
+
+        [TestMethod]
+        public void TestNextLargestPowerOfTwo_OneInput()
+        {
+            int pow = DSP.NextLargestPowerOfTwo(1);
+            Assert.AreEqual(1, pow);
+        }
+
+        [TestMethod]
+        public void TestNextLargestPowerOfTwo_ThirtyOneInput()
+        {
+            int pow = DSP.NextLargestPowerOfTwo(31);
+            Assert.AreEqual(32, pow);
+        }
+
+        [TestMethod]
+        public void TestNextLargestPowerOfTwo_TwentyInput()
+        {
+            int pow = DSP.NextLargestPowerOfTwo(20);
+            Assert.AreEqual(32, pow);
+        }
+
+        [TestMethod]
+        public void TestNextLargestPowerOfTwo_FortyInput()
+        {
+            int pow = DSP.NextLargestPowerOfTwo(40);
+            Assert.AreEqual(64, pow);
+        }
+
+        [TestMethod]
+        public void TestNextLargestPowerOfTwo_ThousandInput()
+        {
+            int pow = DSP.NextLargestPowerOfTwo(1000);
+            Assert.AreEqual(1024, pow);
+        }
+
+        [TestMethod]
+        public void TestNextLargestPowerOfTwo_LargestInput()
+        {
+            int pow = DSP.NextLargestPowerOfTwo(int.MaxValue - 1000);
+            Assert.AreEqual(int.MaxValue, pow);
         }
     }
 }

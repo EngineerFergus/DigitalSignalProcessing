@@ -444,6 +444,22 @@ namespace DigitalSignalProcessing
         }
 
         /// <summary>
+        /// Converts a real sequence to a complex sequence whose real values equal the original sequence and all complex 
+        /// values equal zero.
+        /// </summary>
+        public static Complex[] ConvertToComplex(double[] x)
+        {
+            Complex[] xComplex = new Complex[x.Length];
+
+            for(int i = 0; i < x.Length; i++)
+            {
+                xComplex[i] = x[i];
+            }
+
+            return xComplex;
+        }
+
+        /// <summary>
         /// Pads a sequence with zeros so that the returned sequence has a length of newLength.
         /// </summary>
         public static double[] ZeroPad(double[] x, int newLength)
@@ -457,6 +473,36 @@ namespace DigitalSignalProcessing
             }
 
             return padded;
+        }
+
+        /// <summary>
+        /// Returns the next largest power of two given an unsigned integer x.
+        /// </summary>
+        public static int NextLargestPowerOfTwo(int x)
+        {
+            int numActive = 0;
+            int largestBit = 0;
+
+            for(int i = 0; i < 32; i++)
+            {
+                if((x & (1 << i)) != 0)
+                {
+                    largestBit = i;
+                    numActive++;
+                }
+            }
+
+            if(numActive > 1) { largestBit++; }
+
+            int output = 1 << largestBit;
+            output &= 0b_0111_1111_1111_1111_1111_1111_1111_1111;
+
+            return output;
+        }
+
+        public static Complex[] FFT(Complex[] x)
+        {
+            throw new NotImplementedException();
         }
     }
 }
