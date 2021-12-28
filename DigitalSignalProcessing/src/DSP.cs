@@ -484,7 +484,7 @@ namespace DigitalSignalProcessing
 
             for(int i = 0; i < 30; i++)
             {
-                if(output >= x) { return output; }
+                if(output >= x) { break; }
                 output <<= 1;
             }
 
