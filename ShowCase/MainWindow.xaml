@@ -4,9 +4,29 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ShowCase"
+        xmlns:oxy="http://oxyplot.org/wpf"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <local:MainViewModel/>
+    </Window.DataContext>
     <Grid>
-        <TextBlock x:Name="UnitTestReadout"></TextBlock>
+
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <oxy:PlotView Model="{Binding MyModel}" Grid.Row="1"/>
+
+        <Button x:Name="CountButton" 
+                Content="Click Me!" 
+                Grid.Row="0">
+        </Button>
+
+        <TextBlock x:Name="CountLabel"
+                 Grid.Row="2"
+                 Text="{Binding ButtonLabel}"/>
+
     </Grid>
 </Window>
