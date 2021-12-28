@@ -386,53 +386,6 @@ namespace DigitalSignalProcessing
         }
 
         /// <summary>
-        /// Calculates the Discrete Fourier Transform of a given sequence.
-        /// </summary>
-        public static Complex[] DFT(double[] x)
-        {
-            int N = x.Length;
-            Complex[] X = new Complex[N];
-
-            for(int k = 0; k < N; k++)
-            {
-                Complex sum = 0.0;
-
-                for(int n = 0; n < N; n++)
-                {
-                    sum += x[n] * Complex.Exp(-1 * Complex.ImaginaryOne * 2 * Math.PI * k * n / N);
-                }
-
-                X[k] = sum;
-            }
-
-            return X;
-        }
-
-        /// <summary>
-        /// Calculates the inverse Discrete Fourier Transform of a given sequence. Keeps only the real part of the 
-        /// conversion, making it only useful for real signals and not complex signals.
-        /// </summary>
-        public static double[] IDFT(Complex[] x)
-        {
-            int N = x.Length;
-            double[] X = new double[N];
-
-            for(int n = 0; n < N; n++)
-            {
-                Complex sum = 0.0;
-
-                for(int k = 0; k < N; k++)
-                {
-                    sum += x[k] * Complex.Exp(Complex.ImaginaryOne * 2 * Math.PI * k * n / N);
-                }
-
-                X[n] = sum.Real / N;
-            }
-
-            return X;
-        }
-
-        /// <summary>
         /// Calculates the magnitude of a given complex sequence.
         /// </summary>
         public static double[] Magnitude(Complex[] x)
@@ -563,6 +516,53 @@ namespace DigitalSignalProcessing
             }
 
             return output;
+        }
+
+        /// <summary>
+        /// Calculates the Discrete Fourier Transform of a given sequence.
+        /// </summary>
+        public static Complex[] DFT(double[] x)
+        {
+            int N = x.Length;
+            Complex[] X = new Complex[N];
+
+            for (int k = 0; k < N; k++)
+            {
+                Complex sum = 0.0;
+
+                for (int n = 0; n < N; n++)
+                {
+                    sum += x[n] * Complex.Exp(-1 * Complex.ImaginaryOne * 2 * Math.PI * k * n / N);
+                }
+
+                X[k] = sum;
+            }
+
+            return X;
+        }
+
+        /// <summary>
+        /// Calculates the inverse Discrete Fourier Transform of a given sequence. Keeps only the real part of the 
+        /// conversion, making it only useful for real signals and not complex signals.
+        /// </summary>
+        public static double[] IDFT(Complex[] x)
+        {
+            int N = x.Length;
+            double[] X = new double[N];
+
+            for (int n = 0; n < N; n++)
+            {
+                Complex sum = 0.0;
+
+                for (int k = 0; k < N; k++)
+                {
+                    sum += x[k] * Complex.Exp(Complex.ImaginaryOne * 2 * Math.PI * k * n / N);
+                }
+
+                X[n] = sum.Real / N;
+            }
+
+            return X;
         }
 
         /// <summary>
