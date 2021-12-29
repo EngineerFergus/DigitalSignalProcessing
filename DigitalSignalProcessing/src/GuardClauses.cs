@@ -41,7 +41,7 @@ namespace DigitalSignalProcessing
         {
             if(givenValue < minValue)
             {
-                throw new Exception($"Exception in {methodName}, {argumentName} must be greater than or equal to {minValue}");
+                throw new ArgumentException($"Exception in {methodName}, {argumentName} must be greater than or equal to {minValue}");
             }
         }
 
@@ -49,7 +49,7 @@ namespace DigitalSignalProcessing
         {
             if(givenValue < minValue || givenValue > maxValue)
             {
-                throw new Exception($"Exception in {methodName}, {argumentName} must be greater than {minValue} and less than {maxValue}.");
+                throw new ArgumentException($"Exception in {methodName}, {argumentName} must be greater than {minValue} and less than {maxValue}.");
             }
         }
     }
