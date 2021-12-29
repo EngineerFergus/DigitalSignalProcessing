@@ -253,6 +253,34 @@ namespace DigitalSignalProcessing
         }
 
         /// <summary>
+        /// Returns a sinc function of length M with cutoff frequency fc. fc must be within 0 and 0.5. M must be odd.
+        /// </summary>
+        public static double[] Sinc(int M, double fc)
+        {
+            GuardClauses.IsOutsideLimits(nameof(Sinc), nameof(fc), fc, 0.0, 0.5);
+            GuardClauses.IsEven(nameof(Sinc), nameof(M), M);
+
+            int mPrime = M - 1;
+            double[] sinc = new double[M];
+
+            double rads = 2 * Math.PI * fc;
+            int mByTwo = mPrime / 2;
+
+            for(int i = 0; i < M; i++)
+            {
+                if(i == mPrime / 2)
+                {
+                    sinc[i] = 2 * fc;
+                    continue;
+                }
+                int centeredIdx = i - mByTwo;
+                sinc[i] = Math.Sin(rads * centeredIdx) / (centeredIdx * Math.PI);
+            }
+
+            return sinc;
+        }
+
+        /// <summary>
         /// Generates a Hamming window sequence of total length M
         /// </summary>
         public static double[] Hamming(int M)
@@ -431,6 +459,14 @@ namespace DigitalSignalProcessing
         }
 
         /// <summary>
+        /// Calculates the decibel value of a given value, where decibel is 20Log10(x).
+        /// </summary>
+        public static double DB(double x)
+        {
+            return 20 * Math.Log10(x);
+        }
+
+        /// <summary>
         /// Returns a new complex value where the real and imaginary terms are swapped from the original value x.
         /// </summary>
         public static Complex SwapComplex(Complex x)
@@ -579,6 +615,15 @@ namespace DigitalSignalProcessing
             Complex[] f = DitFft(x);
 
             return f;
+        }
+
+        /// <summary>
+        /// Performs a Fast Fourier Transform on an input sequence x
+        /// </summary>
+        public static Complex[] FFT(double[] x)
+        {
+            Complex[] xComplex = ConvertToComplex(x);
+            return FFT(xComplex);
         }
 
         /// <summary>

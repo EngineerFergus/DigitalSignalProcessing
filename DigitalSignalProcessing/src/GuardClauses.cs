@@ -44,5 +44,13 @@ namespace DigitalSignalProcessing
                 throw new Exception($"Exception in {methodName}, {argumentName} must be greater than or equal to {minValue}");
             }
         }
+
+        public static void IsOutsideLimits(string methodName, string argumentName, double givenValue, double minValue, double maxValue)
+        {
+            if(givenValue < minValue || givenValue > maxValue)
+            {
+                throw new Exception($"Exception in {methodName}, {argumentName} must be greater than {minValue} and less than {maxValue}.");
+            }
+        }
     }
 }

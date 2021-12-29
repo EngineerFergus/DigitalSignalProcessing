@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Windows;
+using System.Numerics;
 using OxyPlot;
 using OxyPlot.Series;
+using OxyPlot.Axes;
+using DigitalSignalProcessing;
 
 namespace ShowCase
 {
@@ -10,6 +13,9 @@ namespace ShowCase
         public PlotModel MyModel { get; private set; }
 
         private int buttonCount;
+        private double[] hammingWindow;
+        private Complex[] hammingFFT;
+
         private string _ButtonLabel;
         public string ButtonLabel
         {
@@ -26,8 +32,28 @@ namespace ShowCase
 
         public MainViewModel()
         {
+            int numPoints = 1024;
+            hammingWindow = DSP.Sinc(51, 0.3);
+            hammingWindow = DSP.ZeroPad(hammingWindow, numPoints);
+            hammingFFT = DSP.FFT(hammingWindow);
             MyModel = new PlotModel { Title = "Example 1" };
-            MyModel.Series.Add(new FunctionSeries(Math.Cos, 0, 10, 0.1, "cos(x)"));
+
+            LineSeries hammingSeries = new LineSeries();
+            hammingSeries.Title = "Hamming Window";
+
+            for(int i = 0; i < hammingFFT.Length; i++)
+            {
+                //hammingSeries.Points.Add(new DataPoint((double)i / hammingFFT.Length, DSP.DB(hammingFFT[i].Magnitude)));
+                hammingSeries.Points.Add(new DataPoint((double)i / hammingFFT.Length, hammingFFT[i].Magnitude));
+                //hammingSeries.Points.Add(new DataPoint((double)i / hammingFFT.Length, hammingWindow[i]));
+            }
+
+            MyModel.Series.Add(hammingSeries);
+            MyModel.Title = "Hamming Window";
+            LinearAxis xAxis = new LinearAxis();
+            xAxis.Position = AxisPosition.Bottom;
+            xAxis.Title = "Sample Number";
+            MyModel.Axes.Add(xAxis);
             ButtonLabel = "You've initialized!";
             buttonCount = 0;
         }

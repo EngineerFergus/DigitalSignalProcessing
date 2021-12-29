@@ -277,5 +277,81 @@ namespace DigitalSignalProcessingTests.DSPTests
                 Assert.AreEqual(original[i], xOutput[i], 0.01 * original[i]);
             }
         }
+
+        [TestMethod]
+        public void TestDFT_ImpulseResponseMagnitude()
+        {
+            double[] impulse = DSP.Impulse(64);
+            Complex[] f = DSP.DFT(impulse);
+
+            for(int i = 0; i < f.Length; i++)
+            {
+                Assert.AreEqual(1.0, f[i].Magnitude, 0.01);
+            }
+
+        }
+
+        [TestMethod]
+        public void TestDFT_ImpulseResponsePhase()
+        {
+            double[] impulse = DSP.Impulse(64);
+            Complex[] f = DSP.DFT(impulse);
+
+            for (int i = 0; i < f.Length; i++)
+            {
+                Assert.AreEqual(0.0, f[i].Phase, 0.01);
+            }
+        }
+
+        [TestMethod]
+        public void TestDFT_ImpulseResponseWithDelayMagnitude()
+        {
+            double[] impulse = DSP.Impulse(64, 1, 4);
+            Complex[] f = DSP.DFT(impulse);
+
+            for (int i = 0; i < f.Length; i++)
+            {
+                Assert.AreEqual(1.0, f[i].Magnitude, 0.01);
+            }
+
+        }
+
+        [TestMethod]
+        public void TestFFT_ImpulseResponseMagnitude()
+        {
+            double[] impulse = DSP.Impulse(64);
+            Complex[] f = DSP.FFT(impulse);
+
+            for (int i = 0; i < f.Length; i++)
+            {
+                Assert.AreEqual(1.0, f[i].Magnitude, 0.01);
+            }
+
+        }
+
+        [TestMethod]
+        public void TestFFT_ImpulseResponsePhase()
+        {
+            double[] impulse = DSP.Impulse(64);
+            Complex[] f = DSP.FFT(impulse);
+
+            for (int i = 0; i < f.Length; i++)
+            {
+                Assert.AreEqual(0.0, f[i].Phase, 0.01);
+            }
+        }
+
+        [TestMethod]
+        public void TestFFT_ImpulseResponseWithDelayMagnitude()
+        {
+            double[] impulse = DSP.Impulse(64, 1, 4);
+            Complex[] f = DSP.FFT(impulse);
+
+            for (int i = 0; i < f.Length; i++)
+            {
+                Assert.AreEqual(1.0, f[i].Magnitude, 0.01);
+            }
+
+        }
     }
 }
