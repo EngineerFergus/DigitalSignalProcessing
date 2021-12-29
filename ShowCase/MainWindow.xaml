@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:behaviours="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:local="clr-namespace:ShowCase"
         xmlns:oxy="http://oxyplot.org/wpf"
         mc:Ignorable="d"
@@ -21,7 +22,14 @@
 
         <Button x:Name="CountButton" 
                 Content="Click Me!" 
-                Grid.Row="0">
+                Grid.Row="0"
+                Width="200"
+                Margin="5">
+            <behaviours:Interaction.Triggers>
+                <behaviours:EventTrigger EventName="Click" SourceObject="{Binding ElementName=CountButton}">
+                    <behaviours:CallMethodAction TargetObject="{Binding}" MethodName="CountButtonClicked"/>
+                </behaviours:EventTrigger>
+            </behaviours:Interaction.Triggers>
         </Button>
 
         <TextBlock x:Name="CountLabel"

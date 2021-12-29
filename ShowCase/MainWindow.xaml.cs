@@ -23,7 +23,6 @@ namespace ShowCase
     {
         public MainWindow()
         {
-            DataContext = new MainViewModel();
             InitializeComponent();
         }
     }
