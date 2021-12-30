@@ -10,7 +10,6 @@
     <Folder Include="Models\" />
     <Folder Include="Resources\" />
     <Folder Include="Utils\Converters\" />
-    <Folder Include="Views\" />
   </ItemGroup>
 
   <ItemGroup>

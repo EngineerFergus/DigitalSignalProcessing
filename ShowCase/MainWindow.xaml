@@ -3,38 +3,75 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:behaviours="http://schemas.microsoft.com/xaml/behaviors"
-        xmlns:local="clr-namespace:ShowCase"
-        xmlns:oxy="http://oxyplot.org/wpf"
+        xmlns:views="clr-namespace:ShowCase.Views"
+        xmlns:viewmodels="clr-namespace:ShowCase.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="DSP Showcase"
+        WindowState="Maximized"
+        Height="600"
+        Width="600">
     <Window.DataContext>
-        <local:MainViewModel/>
+        <viewmodels:MainViewModel/>
     </Window.DataContext>
+
+    <Window.Resources>
+        <Style x:Key="TabSelectionButton"
+               TargetType="RadioButton">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="20,0,0,10"/>
+        </Style>
+
+
+    </Window.Resources>
+    
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition Height="10*"/>
-            <RowDefinition/>
+            <RowDefinition Height="9*"/>
         </Grid.RowDefinitions>
-        <oxy:PlotView Model="{Binding MyModel}" Grid.Row="1"/>
 
-        <Button x:Name="CountButton" 
-                Content="Click Me!" 
-                Grid.Row="0"
-                Width="200"
-                Margin="5">
-            <behaviours:Interaction.Triggers>
-                <behaviours:EventTrigger EventName="Click" SourceObject="{Binding ElementName=CountButton}">
-                    <behaviours:CallMethodAction TargetObject="{Binding}" MethodName="CountButtonClicked"/>
-                </behaviours:EventTrigger>
-            </behaviours:Interaction.Triggers>
-        </Button>
+        <TextBlock x:Name="Header"
+                   Text="Digital Signal Processing Showcase"
+                   FontSize="28"
+                   FontWeight="Bold"
+                   Grid.Column="0"
+                   Grid.ColumnSpan="2"
+                   Grid.Row="0"
+                   VerticalAlignment="Center"
+                   Margin="20,0,0,0"/>
 
-        <TextBlock x:Name="CountLabel"
-                 Grid.Row="2"
-                 Text="{Binding ButtonLabel}"/>
+        <Border x:Name="ContentBox"
+                  BorderBrush="Black"
+                  BorderThickness="1"
+                  Grid.Row="1"
+                  Grid.Column="1"
+                  Margin="5">
+            <views:SequencesView/>
+        </Border>
 
+        <StackPanel x:Name="TabSelectionPanel"
+                    Grid.Column="0"
+                    Grid.Row="1"
+                    Margin="0,20,0,0">
+            <RadioButton x:Name="SequencesButton"
+                         Content="Sequences"
+                         Style="{StaticResource TabSelectionButton}"/>
+            <RadioButton x:Name="WindowsButton"
+                         Content="Windows"
+                         Style="{StaticResource TabSelectionButton}"/>
+            <RadioButton x:Name="FourierButton"
+                         Content="Fourier Transforms"
+                         Style="{StaticResource TabSelectionButton}"/>
+            <RadioButton x:Name="SincButton"
+                         Content="Windowed-Sinc"
+                         Style="{StaticResource TabSelectionButton}"/>
+        </StackPanel>
     </Grid>
 </Window>
