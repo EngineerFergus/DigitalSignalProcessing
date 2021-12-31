@@ -23,6 +23,7 @@
             <Setter Property="Margin" Value="20,0,0,10"/>
         </Style>
 
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
 
     </Window.Resources>
     
@@ -47,13 +48,14 @@
                    VerticalAlignment="Center"
                    Margin="20,0,0,0"/>
 
-        <Border x:Name="ContentBox"
+        <Border x:Name="ContentBorder"
                   BorderBrush="Black"
                   BorderThickness="1"
                   Grid.Row="1"
                   Grid.Column="1"
                   Margin="5">
-            <views:SequencesView/>
+            <views:SequencesView x:Name="Sequences"
+                                 Visibility="{Binding IsChecked, ElementName=SequencesButton, Converter={StaticResource BooleanToVisibilityConverter}}"/>
         </Border>
 
         <StackPanel x:Name="TabSelectionPanel"
@@ -62,7 +64,8 @@
                     Margin="0,20,0,0">
             <RadioButton x:Name="SequencesButton"
                          Content="Sequences"
-                         Style="{StaticResource TabSelectionButton}"/>
+                         Style="{StaticResource TabSelectionButton}"
+                         IsChecked="True"/>
             <RadioButton x:Name="WindowsButton"
                          Content="Windows"
                          Style="{StaticResource TabSelectionButton}"/>
