@@ -48,15 +48,15 @@
                    VerticalAlignment="Center"
                    Margin="20,0,0,0"/>
 
-        <Border x:Name="ContentBorder"
-                  BorderBrush="Black"
-                  BorderThickness="1"
-                  Grid.Row="1"
-                  Grid.Column="1"
-                  Margin="5">
-            <views:SequencesView x:Name="Sequences"
-                                 Visibility="{Binding IsChecked, ElementName=SequencesButton, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-        </Border>
+        <views:SequencesView x:Name="Sequences"
+                             Visibility="{Binding IsChecked, ElementName=SequencesButton, Converter={StaticResource BooleanToVisibilityConverter}}"
+                             Grid.Row="1"
+                             Grid.Column="1"/>
+
+        <views:WindowsView x:Name="Windows"
+                           Visibility="{Binding IsChecked, ElementName=WindowsButton, Converter={StaticResource BooleanToVisibilityConverter}}"
+                           Grid.Row="1"
+                           Grid.Column="1"/>
 
         <StackPanel x:Name="TabSelectionPanel"
                     Grid.Column="0"

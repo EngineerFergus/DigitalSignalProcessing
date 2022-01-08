@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DigitalSignalProcessing;
+﻿using DigitalSignalProcessing;
 using ShowCase.Utils;
 using OxyPlot;
-using OxyPlot.Series;
-using OxyPlot.Axes;
 
 namespace ShowCase.ViewModels
 {
