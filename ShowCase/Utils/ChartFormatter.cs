@@ -13,7 +13,7 @@ namespace ShowCase.Utils
     {
         /// <summary>
         /// Formats a digital sequence with black rectangular markers for each data point. Since it is a digital signal,
-        /// the x-axis is labelled as "Sample Number" and the y-axis is labelled as "Magnitude". 
+        /// the x-axis is labeled as "Sample Number" and the y-axis is labeled as "Magnitude". 
         /// </summary>
         /// <param name="sequence">Input digital signal</param>
         /// <param name="title">Title of the chart</param>
