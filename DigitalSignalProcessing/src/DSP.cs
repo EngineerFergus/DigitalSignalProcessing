@@ -362,6 +362,23 @@ namespace DigitalSignalProcessing
         }
 
         /// <summary>
+        /// Generates a sin sequence of length M with frequency of k. For example, if k is equal to 2, the sin wave
+        /// will complete two cycles within the total sequence length of M
+        /// </summary>
+        public static double[] SinSequence(int M, int k, double amplitude = 1)
+        {
+            GuardClauses.IsOutOfBounds(nameof(SinSequence), nameof(k), $"{nameof(M)}/2", k, M / 2);
+            double[] sequence = new double[M];
+
+            for(int i = 0; i < M; i++)
+            {
+                sequence[i] = Math.Sin(2 * Math.PI * k * i / M);
+            }
+
+            return sequence;
+        }
+
+        /// <summary>
         /// Calculates the moving average of sequence x with given box size. Box size must be odd.
         /// </summary>
         public static double[] AverageFilter(double[] x, int boxSize)

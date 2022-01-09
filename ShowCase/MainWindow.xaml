@@ -58,6 +58,11 @@
                            Grid.Row="1"
                            Grid.Column="1"/>
 
+        <views:FourierTransformsView x:Name="FourierTransforms"
+                                     Visibility="{Binding IsChecked, ElementName=FourierButton, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                     Grid.Row="1"
+                                     Grid.Column="1"/>
+
         <StackPanel x:Name="TabSelectionPanel"
                     Grid.Column="0"
                     Grid.Row="1"
