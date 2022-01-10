@@ -51,7 +51,7 @@ namespace ShowCase.Utils
             LinearAxis yAxis = new()
             {
                 Position = AxisPosition.Left,
-                Title = "Magnitude",
+                Title = "Amplitude",
                 MajorGridlineStyle = LineStyle.Dot,
                 MajorGridlineColor = lightGray
             };
@@ -75,9 +75,9 @@ namespace ShowCase.Utils
             OxyColor black = OxyColor.FromRgb(0, 0, 0);
             OxyColor lightGray = OxyColor.FromRgb(80, 80, 80);
             series.Color = black;
-            //series.MarkerType = MarkerType.Square;
-            //series.MarkerSize = 3;
-            //series.MarkerFill = black;
+            series.MarkerType = MarkerType.Square;
+            series.MarkerSize = 3;
+            series.MarkerFill = black;
             series.StrokeThickness = 1;
 
             plotModel.Series.Add(series);
@@ -94,7 +94,7 @@ namespace ShowCase.Utils
             LinearAxis yAxis = new()
             {
                 Position = AxisPosition.Left,
-                Title = "Magnitude",
+                Title = "Amplitude",
                 MajorGridlineStyle = LineStyle.Dot,
                 MajorGridlineColor = lightGray
             };
