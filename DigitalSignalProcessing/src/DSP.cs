@@ -691,5 +691,36 @@ namespace DigitalSignalProcessing
 
             return xInverse;
         }
+
+        /// <summary>
+        /// Inverts a filter kernel so that the magnitude of the Fourier Transform of the kernel is flipped. For example, 
+        /// a lowpass kernel will become a highpass kernel with the same cutoff frequency.
+        /// </summary>
+        public static double[] SpectralInversion(double[] kernel)
+        {
+            GuardClauses.IsEven(nameof(SpectralInversion), $"{nameof(kernel)} length", kernel.Length);
+
+            double[] inverted = new double[kernel.Length];
+            Array.Copy(kernel, inverted, kernel.Length);
+
+            for(int i = 0; i < inverted.Length; i++)
+            {
+                inverted[i] = -inverted[i];
+            }
+
+            inverted[inverted.Length / 2 + 1] += 1;
+
+            return inverted;
+        }
+
+        /// <summary>
+        /// Spectrally reverses a filter kernel so that the magnitude of the Fourier Transform is flipped around the discrete frequency
+        /// of 0.25. For example, a lowpass filter with a cutoff frequency of 0.2 will become a highpass filter with a cutoff frequency 
+        /// of 0.3. (Discrete frequencies range from 0 to 0.5)
+        /// </summary>
+        public static double[] SpectralReversal(double[] kernel)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
