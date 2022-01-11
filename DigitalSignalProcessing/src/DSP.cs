@@ -281,6 +281,36 @@ namespace DigitalSignalProcessing
         }
 
         /// <summary>
+        /// Returns a windowed-sinc sequence of length M with a cutoff frequency of fc. fc must be between 0 and 0.5. Defaults to using
+        /// a Blackman window. The returned sequence is normalized so that unity gain is provided at DC.
+        /// </summary>
+        /// <param name="M">Length of sequence</param>
+        /// <param name="fc">cutoff frequency of sequence</param>
+        /// <returns>windowed-sinc sequence</returns>
+        public static double[] WindowedSinc(int M, double fc)
+        {
+            GuardClauses.IsEven(nameof(WindowedSinc), nameof(M), M);
+            GuardClauses.IsOutsideLimits(nameof(WindowedSinc), nameof(fc), fc, 0, 0.5);
+
+            double[] window = Blackman(M);
+            double[] sinc = Sinc(M, fc);
+            double sum = 0;
+
+            for(int i = 0; i < sinc.Length; i++)
+            {
+                sinc[i] *= window[i];
+                sum += sinc[i];
+            }
+
+            for(int i = 0; i < sinc.Length; i++)
+            {
+                sinc[i] /= sum;
+            }
+
+            return sinc;
+        }
+
+        /// <summary>
         /// Generates a Hamming window sequence of total length M
         /// </summary>
         public static double[] Hamming(int M)
@@ -720,7 +750,17 @@ namespace DigitalSignalProcessing
         /// </summary>
         public static double[] SpectralReversal(double[] kernel)
         {
-            throw new NotImplementedException();
+            GuardClauses.IsEven(nameof(SpectralReversal), $"{nameof(kernel)} length", kernel.Length);
+
+            double[] reversed = new double[kernel.Length];
+            Array.Copy(kernel, reversed, kernel.Length);
+
+            for (int i = 1; i < reversed.Length; i += 2)
+            {
+                reversed[i] *= -1;
+            }
+
+            return reversed;
         }
     }
 }

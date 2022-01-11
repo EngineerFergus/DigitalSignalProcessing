@@ -159,7 +159,7 @@ namespace DigitalSignalProcessingTests.DSPTests
         public void TestZeroPad_ImproperInput()
         {
             double[] x = new double[] { 1, 2, 3, 4, 5 };
-            Assert.ThrowsException<Exception>(() => DSP.ZeroPad(x, 3));
+            Assert.ThrowsException<ArgumentException>(() => DSP.ZeroPad(x, 3));
         }
 
         [TestMethod]
@@ -174,7 +174,7 @@ namespace DigitalSignalProcessingTests.DSPTests
         public void TestZeroPadComplex_ImproperInput()
         {
             Complex[] x = new Complex[] { 1, 2, 3, 4, 5 };
-            Assert.ThrowsException<Exception>(() => DSP.ZeroPad(x, 3));
+            Assert.ThrowsException<ArgumentException>(() => DSP.ZeroPad(x, 3));
         }
 
         [TestMethod]
@@ -226,7 +226,6 @@ namespace DigitalSignalProcessingTests.DSPTests
             {
                 Assert.AreEqual(x[i], xP[i], x[i] * 0.01);
             }
-
         }
 
         [TestMethod]

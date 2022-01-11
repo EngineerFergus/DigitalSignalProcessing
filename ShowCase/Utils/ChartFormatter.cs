@@ -66,7 +66,7 @@ namespace ShowCase.Utils
             PlotModel plotModel = new() { Title = title };
             LineSeries series = new();
 
-            for (int i = 0; i < spectrum.Length; i++)
+            for (int i = 0; i < spectrum.Length / 2; i++)
             {
                 double f = (double)i / spectrum.Length;
                 series.Points.Add(new DataPoint(f, spectrum[i].Magnitude));
