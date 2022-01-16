@@ -352,5 +352,24 @@ namespace DigitalSignalProcessingTests.DSPTests
             }
 
         }
+
+        [TestMethod]
+        public void TestSpectralInversion_OutputMagnitude()
+        {
+            int kernelLength = 51;
+            int paddingLength = 64;
+            double[] original = DSP.WindowedSinc(kernelLength, 0.2);
+            double[] inverted = DSP.SpectralInversion(original);
+            original = DSP.ZeroPad(original, paddingLength);
+            inverted = DSP.ZeroPad(inverted, paddingLength);
+            double[] originalMag = DSP.Magnitude(DSP.FFT(original));
+            double[] invertedMag = DSP.Magnitude(DSP.FFT(inverted));
+
+            for(int i = 0; i < paddingLength; i++)
+            {
+                Assert.AreEqual(1 - originalMag[i], invertedMag[i], 0.001);
+            }
+
+        }
     }
 }

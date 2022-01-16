@@ -792,7 +792,7 @@ namespace DigitalSignalProcessing
                 inverted[i] = -inverted[i];
             }
 
-            inverted[inverted.Length / 2 + 1] += 1;
+            inverted[inverted.Length / 2] += 1;
 
             return inverted;
         }
