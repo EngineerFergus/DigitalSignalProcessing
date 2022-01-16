@@ -26,20 +26,24 @@ namespace ShowCase.ViewModels
 
         public WindowedSincViewModel()
         {
-            int M = 128;
-            double fc = 0.2;
+            int M = 151;
+            int MPad = 256;
+            double fc = 0.1;
             sincSequence = DSP.Sinc(M, fc);
             windowedSincSeq = DSP.WindowedSinc(M, fc);
-            sincTransform = DSP.FFT(sincSequence);
-            windowedSincTransform = DSP.FFT(windowedSincSeq);
 
             SincPlot = ChartFormatter.FormatDigitalSequence(sincSequence, "Sinc");
             WindowedSincPlot = ChartFormatter.FormatDigitalSequence(windowedSincSeq, "Windowed-Sinc");
 
-            SincMagnitudePlot = ChartFormatter.FormatSpectrumMagnitude(sincTransform, "Sinc Frequency Spectrum");
-            WindowedSincMagnitudePlot = ChartFormatter.FormatSpectrumMagnitude(windowedSincTransform, "Windowed-Sinc Frequency Spectrum");
+            sincSequence = DSP.ZeroPad(sincSequence, MPad);
+            windowedSincSeq = DSP.ZeroPad(windowedSincSeq, MPad);
+            sincTransform = DSP.FFT(sincSequence);
+            windowedSincTransform = DSP.FFT(windowedSincSeq);
 
-            SincDBPlot = ChartFormatter.FormatSpectrumMagnitudeDB(sincTransform, "Sinc Frequency Spectrum (DB)");
+            SincMagnitudePlot = ChartFormatter.FormatSpectrumMagnitude(sincTransform, "Sinc Spectrum");
+            WindowedSincMagnitudePlot = ChartFormatter.FormatSpectrumMagnitude(windowedSincTransform, "Windowed-Sinc Spectrum");
+
+            SincDBPlot = ChartFormatter.FormatSpectrumMagnitudeDB(sincTransform, "Sinc Spectrum (DB)");
             WindowedSincDBPlot = ChartFormatter.FormatSpectrumMagnitudeDB(windowedSincTransform, "Windowed-Sinc Spectrum (DB)");
         }
     }

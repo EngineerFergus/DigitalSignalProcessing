@@ -63,6 +63,11 @@
                                      Grid.Row="1"
                                      Grid.Column="1"/>
 
+        <views:WindowedSincView x:Name="WindowedSincs"
+                                Visibility="{Binding IsChecked, ElementName=SincButton, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                Grid.Row="1"
+                                Grid.Column="1"/>
+
         <StackPanel x:Name="TabSelectionPanel"
                     Grid.Column="0"
                     Grid.Row="1"
