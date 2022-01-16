@@ -231,5 +231,37 @@ namespace DigitalSignalProcessingTests.DSPTests
             int boxSize = 9;
             double[] y = DSP.AverageFilter(x, boxSize);
         }
+
+        [TestMethod]
+        public void TestTruncConv_OutputLength()
+        {
+            double[] x = new double[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            double[] h = new double[] { 1, 2, 3 };
+            double[] y = DSP.TruncConv(x, h);
+            Assert.AreEqual(x.Length, y.Length);
+        }
+
+        [TestMethod]
+        public void TestTruncConv_OutputLengthReversedInputs()
+        {
+            double[] x = new double[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            double[] h = new double[] { 1, 2, 3 };
+            double[] y = DSP.TruncConv(h, x);
+            Assert.AreEqual(x.Length, y.Length);
+        }
+
+        [TestMethod]
+        public void TestTruncConv_OutputValues()
+        {
+            double[] x = new double[] { 1, 2, 3, 4, 5, 6 };
+            double[] h = new double[] { 1, 1, 1 };
+            double[] y = DSP.TruncConv(x, h);
+            double[] yTrue = new double[] { 3, 6, 9, 12, 15, 11 };
+
+            for (int i = 0; i < y.Length; i++)
+            {
+                Assert.AreEqual(yTrue[i], y[i], 0.01);
+            }
+        }
     }
 }

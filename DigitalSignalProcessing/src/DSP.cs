@@ -253,6 +253,60 @@ namespace DigitalSignalProcessing
         }
 
         /// <summary>
+        /// Convolves two sequences and returns an output with the same length of the longest of the two input sequences.
+        /// </summary>
+        /// <param name="x">Input sequence x</param>
+        /// <param name="h">Input sequence h</param>
+        /// <returns>Convolved sequence</returns>
+        public static double[] TruncConv(double[] x, double[] h)
+        {
+            if(x.Length < h.Length) { return TruncConv(h, x); }
+            int N = x.Length;
+            int M = h.Length;
+            int MbyTwo = M / 2;
+            int L = N + M - 1;
+            double[] y = new double[N];
+
+            for (int i = MbyTwo; i < M - 1; i++)
+            {
+                double sum = 0;
+
+                for (int j = 0; j < i + 1; j++)
+                {
+                    sum += h[j] * x[i - j];
+                }
+
+                y[i - MbyTwo] = sum;
+            }
+
+            for (int i = M - 1; i < L - M + 1; i++)
+            {
+                double sum = 0;
+
+                for (int j = 0; j < M; j++)
+                {
+                    sum += h[j] * x[i - j];
+                }
+
+                y[i - MbyTwo] = sum;
+            }
+
+            for (int i = L - M + 1; i < N + MbyTwo; i++)
+            {
+                double sum = 0;
+
+                for (int j = i - L + M; j < M; j++)
+                {
+                    sum += h[j] * x[i - j];
+                }
+
+                y[i - MbyTwo] = sum;
+            }
+
+            return y;
+        }
+
+        /// <summary>
         /// Returns a sinc function of length M with cutoff frequency fc. fc must be within 0 and 0.5. M must be odd.
         /// </summary>
         public static double[] Sinc(int M, double fc)
