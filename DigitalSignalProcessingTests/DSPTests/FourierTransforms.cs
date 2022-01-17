@@ -369,7 +369,24 @@ namespace DigitalSignalProcessingTests.DSPTests
             {
                 Assert.AreEqual(1 - originalMag[i], invertedMag[i], 0.001);
             }
+        }
 
+        [TestMethod]
+        public void TestSpectralReversal_OutputMagnitude()
+        {
+            int kernelLength = 51;
+            int paddingLength = 64;
+            double[] original = DSP.WindowedSinc(kernelLength, 0.2);
+            double[] inverted = DSP.SpectralReversal(original);
+            original = DSP.ZeroPad(original, paddingLength);
+            inverted = DSP.ZeroPad(inverted, paddingLength);
+            double[] originalMag = DSP.Magnitude(DSP.FFT(original));
+            double[] invertedMag = DSP.Magnitude(DSP.FFT(inverted));
+
+            for (int i = 0; i < paddingLength / 2; i++)
+            {
+                Assert.AreEqual(originalMag[i], invertedMag[paddingLength / 2 - i], 0.001);
+            }
         }
     }
 }

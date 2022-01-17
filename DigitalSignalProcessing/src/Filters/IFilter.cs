@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Numerics;
 
 namespace DigitalSignalProcessing
 {
     public interface IFilter
     {
-        double CutoffFrequency { get; }
+        public double[] Kernel { get; }
         double[] Filter(double[] x);
+        Complex[] FrequencyResponse(int length = 1024);
     }
 }

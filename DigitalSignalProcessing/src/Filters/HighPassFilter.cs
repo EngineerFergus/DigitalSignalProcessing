@@ -4,28 +4,28 @@ using System.Numerics;
 namespace DigitalSignalProcessing
 {
     /// <summary>
-    /// Standard windowed-sinc lowpass filter with a single cutoff frequency
+    /// Standard windowed-sinc high pass filter.
     /// </summary>
-    public class LowPassFilter : IFilter
+    public class HighPassFilter : IFilter
     {
         public double CutoffFrequency { get; private set; }
         public int M { get; private set; }
         public double[] Kernel { get; private set; }
 
         /// <summary>
-        /// Windowed-Sinc lowpass filter with cutoff frequency of fc and total kernel length of M.
+        /// Windowed-sinc high pass filter made using spectral inversion.
         /// </summary>
         /// <param name="fc">Cutoff frequency</param>
-        /// <param name="M">Length of kernel</param>
-        public LowPassFilter(double fc, int M)
+        /// <param name="M">Length of filter kernel</param>
+        public HighPassFilter(double fc, int M)
         {
-            GuardClauses.IsOutsideLimits(nameof(LowPassFilter), nameof(fc), fc, 0, 0.5);
-            GuardClauses.IsLessThan(nameof(LowPassFilter), nameof(M), M, 0);
-            GuardClauses.IsEven(nameof(LowPassFilter), nameof(M), M);
+            GuardClauses.IsOutsideLimits(nameof(HighPassFilter), nameof(fc), fc, 0, 0.5);
+            GuardClauses.IsLessThan(nameof(HighPassFilter), nameof(M), M, 0);
+            GuardClauses.IsEven(nameof(HighPassFilter), nameof(M), M);
 
             CutoffFrequency = fc;
             this.M = M;
-            Kernel = DSP.WindowedSinc(M, fc);
+            Kernel = DSP.SpectralInversion(DSP.WindowedSinc(M, fc));
         }
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace DigitalSignalProcessing
             int minKernelSize = Math.Min(input.Length, Kernel.Length);
             double[] output;
 
-            if(minKernelSize <= 64)
+            if (minKernelSize <= 64)
             {
                 // do regular convolution
                 output = DSP.TruncConv(input, Kernel);
@@ -52,7 +52,7 @@ namespace DigitalSignalProcessing
                 Complex[] X = DSP.FFT(paddedInput);
                 Complex[] K = DSP.FFT(paddedKernel);
 
-                for(int i = 0; i < X.Length; i++)
+                for (int i = 0; i < X.Length; i++)
                 {
                     X[i] = X[i] * K[i];
                 }
@@ -74,7 +74,7 @@ namespace DigitalSignalProcessing
             int nextPow = DSP.NextLargestPowerOfTwo(length);
             Complex[] freqZ;
 
-            if(length == nextPow)
+            if (length == nextPow)
             {
                 // use FFT
                 freqZ = DSP.FFT(DSP.ZeroPad(Kernel, length));
