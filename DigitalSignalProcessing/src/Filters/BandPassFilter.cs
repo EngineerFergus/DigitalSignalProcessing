@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Numerics;
 
-namespace DigitalSignalProcessing.src.Filters
+namespace DigitalSignalProcessing
 {
     public class BandPassFilter : IFilter
     {

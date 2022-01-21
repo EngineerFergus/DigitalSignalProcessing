@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Numerics;
 
-namespace DigitalSignalProcessing.src.Filters
+namespace DigitalSignalProcessing
 {
-    public class BandRejectFilter
+    public class BandRejectFilter : IFilter
     {
         public double CutoffFrequencyOne { get; private set; }
         public double CutoffFrequencyTwo { get; private set; }
