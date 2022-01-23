@@ -68,6 +68,11 @@
                                 Grid.Row="1"
                                 Grid.Column="1"/>
 
+        <views:FilterView x:Name="FilterDesign"
+                          Visibility="{Binding IsChecked, ElementName=FilterButton, Converter={StaticResource BooleanToVisibilityConverter}}"
+                          Grid.Row="1"
+                          Grid.Column="1"/>
+
         <StackPanel x:Name="TabSelectionPanel"
                     Grid.Column="0"
                     Grid.Row="1"
@@ -84,6 +89,9 @@
                          Style="{StaticResource TabSelectionButton}"/>
             <RadioButton x:Name="SincButton"
                          Content="Windowed-Sinc"
+                         Style="{StaticResource TabSelectionButton}"/>
+            <RadioButton x:Name="FilterButton"
+                         Content="Filter Design"
                          Style="{StaticResource TabSelectionButton}"/>
         </StackPanel>
     </Grid>
