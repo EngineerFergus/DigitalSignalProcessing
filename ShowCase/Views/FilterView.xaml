@@ -130,9 +130,14 @@
                         Grid.Row="3"
                         HorizontalAlignment="Left"
                         MinWidth="240"
-                        Command="{Binding GenerateFilterCommand, Mode=OneTime}"/>
+                        Command="{Binding GenerateFilterCommand}"/>
 
             </Grid>
+
+            <oxy:PlotView x:Name="SpectrumPlot"
+                          Model="{Binding FilterFrequencyPlot}"
+                          Grid.Row="2"/>
+
         </Grid>
     </Border>
 </UserControl>

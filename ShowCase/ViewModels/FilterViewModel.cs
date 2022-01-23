@@ -5,6 +5,7 @@ using OxyPlot;
 using System.Numerics;
 using System.Windows;
 using System.Windows.Input;
+using System;
 
 namespace ShowCase.ViewModels
 {
@@ -62,14 +63,27 @@ namespace ShowCase.ViewModels
             {
                 if(_GenerateFilterCommand == null)
                 {
-                    _GenerateFilterCommand = new RelayCommand(CanGenerateFilter, OnGenerateFilter_Clicked);
+                    _GenerateFilterCommand = new RelayCommand(CanGenerateFilter, OnGenerateFilterClicked);
                 }
 
                 return _GenerateFilterCommand;
             }
         }
 
-        public PlotModel FilterFrequencyPlot { get; private set; }
+        private PlotModel _FilterFrequencyPlot;
+        public PlotModel FilterFrequencyPlot
+        {
+            get { return _FilterFrequencyPlot; }
+            set
+            {
+                if(value != _FilterFrequencyPlot)
+                {
+                    _FilterFrequencyPlot = value;
+                    OnPropertyChanged(nameof(FilterFrequencyPlot));
+                }
+            }
+        }
+
         public PlotModel FilterKernelPlot { get; private set; }
 
         public FilterViewModel()
@@ -80,19 +94,36 @@ namespace ShowCase.ViewModels
 
             filter = new LowPassFilter(CutoffOne, M);
             Complex[] freqZ = filter.FrequencyResponse();
-
-
             FilterFrequencyPlot = ChartFormatter.FormatSpectrumMagnitudeDB(freqZ, "Spectrum");
         }
 
-        public void OnGenerateFilter_Clicked(object data)
+        public void OnGenerateFilterClicked(object data)
         {
+            _CutoffOne = ClampFrequency(_CutoffOne);
+            _CutoffTwo = ClampFrequency(_CutoffTwo);
 
+            filter = selectedType switch
+            {
+                FilterType.LowPass => new LowPassFilter(_CutoffOne, M),
+                FilterType.HighPass => new HighPassFilter(_CutoffOne, M),
+                FilterType.BandPass => new BandPassFilter(_CutoffOne, _CutoffTwo, M),
+                FilterType.BandReject => new BandRejectFilter(_CutoffOne, _CutoffTwo, M),
+                _ => new LowPassFilter(_CutoffOne, M),
+            };
+            Complex[] freqZ = filter.FrequencyResponse();
+            FilterFrequencyPlot = ChartFormatter.FormatSpectrumMagnitudeDB(freqZ, "Spectrum");
         }
 
-        public bool CanGenerateFilter(object data)
+        public static bool CanGenerateFilter(object data)
         {
             return true;
+        }
+
+        public static double ClampFrequency(double frequency)
+        {
+            frequency = Math.Max(0.01, frequency);
+            frequency = Math.Min(0.49, frequency);
+            return frequency;
         }
 
     }
