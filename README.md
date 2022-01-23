@@ -30,6 +30,13 @@ Convolution is a key concept when filtering data in real world applications. Dep
 ## Common Sequences
 There are a few sequences that have useful properties and are important during applications in DSP. These sequences include the impulse, step, and rectangle sequences. The impulse sequence, particularly the unit impulse sequence, is used to mimic the dirac-delta function in continuous systems for digital applications. A unit impulse sequence has a value of one at the zero sample and a value of zero for every other sample. While the delta function is passed through a continuous system to derive it's impulse response function, the unit impulse sequence is passed through a digital system to obtain it's impulse response. The step sequence can be used to measure things such as rise time and the step response of a digital system. The rectangle sequence is a key sequence used in the design of filters. Examples of these sequences are shown below.
 
+### Image here
+
+### Sinc Sequence
+The rectangle sequence is closely related to the sinc sequence through the Fourier Transform. The continuous Fourier Transform of a rectangle window is the sinc function. A digital form of the sinc function can also be calculated. Both the continuous sinc function and discrete sinc sequence function is shown below.
+
+
+
 ## Common Windows
 
 ## Discrete Fourier Transform (DFT)
