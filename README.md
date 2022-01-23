@@ -7,6 +7,7 @@ Sources:
 - [Discrete Fourier Transform](https://en.wikipedia.org/wiki/Discrete_Fourier_transform)
 - [Cooley-Tukey Fast Fourier Transform](https://en.wikipedia.org/wiki/Cooley%E2%80%93Tukey_FFT_algorithm)
 - [Calculating inverse FFT from forward FFT](https://flylib.com/books/en/2.729.1/computing_the_inverse_fft_using_the_forward_fft.html)
+- [Enumeration to ComboBox Options](https://stackoverflow.com/questions/6145888/how-to-bind-an-enum-to-a-combobox-control-in-wpf)
 
 Most of the algorithms will come from the textbook listed in the sources.
 
