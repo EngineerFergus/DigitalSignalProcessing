@@ -92,7 +92,6 @@ namespace DigitalSignalProcessingTests.FilterTests
                 if (i == freqZ.Length / 4) { idealMag = 0.5; }
                 Assert.AreEqual(idealMag, freqZ[i], 0.5);
             }
-
         }
 
         [TestMethod]
@@ -121,6 +120,88 @@ namespace DigitalSignalProcessingTests.FilterTests
             double fc = 0.2;
             double fc2 = 1.1;
             Assert.ThrowsException<ArgumentException>(() => new BandPassFilter(fc, fc2, M));
+        }
+
+        [TestMethod]
+        public void TestBandPassFilter_OutOfRangeFrequencyThrowsExceptionFlipped()
+        {
+            int M = 51;
+            double fc = 2.2;
+            double fc2 = 0.4;
+            Assert.ThrowsException<ArgumentException>(() => new BandPassFilter(fc, fc2, M));
+        }
+
+        [TestMethod]
+        public void TestBandPassFilter_FrequencyResponseMagnitude()
+        {
+            int M = 101;
+            double fc = 0.125;
+            double fcTwo = 0.375;
+            BandPassFilter filter = new BandPassFilter(fc, fcTwo, M);
+            double[] freqZ = DSP.Magnitude(filter.FrequencyResponse(128));
+
+            for (int i = 0; i < freqZ.Length / 2; i++)
+            {
+                double fi = (double)i / 128;
+                double idealMag = fi > fc && fi < fcTwo ? 1 : 0;
+                if (i == freqZ.Length / 8 || i == freqZ.Length * 3 / 8) { idealMag = 0.5; }
+                Assert.AreEqual(idealMag, freqZ[i], 0.5);
+            }
+        }
+
+        [TestMethod]
+        public void TestBandRejectFilter_KernelLength()
+        {
+            int M = 51;
+            double fc = 0.2;
+            double fc2 = 0.3;
+            BandRejectFilter filter = new BandRejectFilter(fc, fc2, M);
+            Assert.AreEqual(M, filter.Kernel.Length);
+        }
+
+        [TestMethod]
+        public void TestBandRejectFilter_EvenKernelLengthThrowsException()
+        {
+            int M = 64;
+            double fc = 0.2;
+            double fc2 = 0.3;
+            Assert.ThrowsException<ArgumentException>(() => new BandRejectFilter(fc, fc2, M));
+        }
+
+        [TestMethod]
+        public void TestBandRejectFilter_OutOfRangeFrequencyThrowsException()
+        {
+            int M = 51;
+            double fc = 0.2;
+            double fc2 = 1.1;
+            Assert.ThrowsException<ArgumentException>(() => new BandRejectFilter(fc, fc2, M));
+        }
+
+        [TestMethod]
+        public void TestBandRejectFilter_OutOfRangeFrequencyThrowsExceptionFlipped()
+        {
+            int M = 51;
+            double fc = 2.2;
+            double fc2 = 0.4;
+            Assert.ThrowsException<ArgumentException>(() => new BandRejectFilter(fc, fc2, M));
+        }
+
+        [TestMethod]
+        public void TestBandRejectFilter_FrequencyResponseMagnitude()
+        {
+            int M = 101;
+            double fc = 0.125;
+            double fcTwo = 0.375;
+            BandRejectFilter filter = new BandRejectFilter(fc, fcTwo, M);
+            double[] freqZ = DSP.Magnitude(filter.FrequencyResponse(128));
+
+            for (int i = 0; i < freqZ.Length / 2; i++)
+            {
+                double fi = (double)i / 128;
+                double idealMag = fi > fc && fi < fcTwo ? 0 : 1;
+                if (i == freqZ.Length / 8 || i == freqZ.Length * 3 / 8) { idealMag = 0.5; }
+                Assert.AreEqual(idealMag, freqZ[i], 0.5);
+            }
         }
     }
 }
