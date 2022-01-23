@@ -4,10 +4,17 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ShowCase.Views"
+             xmlns:enum="clr-namespace:ShowCase.Utils.Enums"
+             xmlns:enumhelper="clr-namespace:ShowCase.Utils.Converters.EnumToCollection"
              xmlns:viewmodels="clr-namespace:ShowCase.ViewModels"
              xmlns:oxy="http://oxyplot.org/wpf"
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.DataContext>
+        <viewmodels:FilterViewModel/>
+    </UserControl.DataContext>
+
     <Border x:Name="FilterBorder"
                   BorderBrush="Black"
                   BorderThickness="1"
@@ -33,7 +40,7 @@
                    FontWeight="Bold"
                    Margin="60,20,20,20"
                    HorizontalAlignment="Left"
-                   VerticalAlignment="Top"
+                   VerticalAlignment="Center"
                    Grid.ColumnSpan="1"/>
 
             <Grid x:Name="FilterControlPanel"
@@ -42,57 +49,90 @@
                         Grid.ColumnSpan="3"
                   Margin="10">
                 <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
                 </Grid.RowDefinitions>
 
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="2*"/>
-                </Grid.ColumnDefinitions>
-
-                <TextBlock x:Name="FilterSelectionLabel"
+                <StackPanel x:Name="FilterSelectionPanel"
+                            Grid.Row="0"
+                            Orientation="Horizontal"
+                            Margin="10">
+                    <TextBlock x:Name="FilterSelectionLabel"
                            Text="Filter Type: "
-                           Grid.Row="0"
-                           Grid.Column="0"
                            FontSize="20"
                            HorizontalAlignment="Right"
                            VerticalAlignment="Center"/>
 
-                <ComboBox x:Name="FilterSelectionOptions"
-                          Grid.Row="0"
-                          Grid.Column="1"
-                          VerticalContentAlignment="Center"
-                          FontSize="16"
-                          MaxWidth="200">
-                    <ComboBoxItem Content="Low Pass Filter"/>
-                    <ComboBoxItem Content="High Pass Filter"/>
-                    <ComboBoxItem Content="Band Pass Filter"/>
-                    <ComboBoxItem Content="Band Reject Filter"/>
-                </ComboBox>
+                    <ComboBox x:Name="FilterSelectionOptions"
+                              VerticalContentAlignment="Center"
+                              FontSize="20"
+                              MinWidth="200"
+                              ItemsSource="{Binding Path=SelectedType, Converter={enumhelper:EnumToCollectionConverter}, Mode=OneTime}"
+                              SelectedValuePath="Value"
+                              DisplayMemberPath="Description"
+                              SelectedValue="{Binding Path=SelectedType, Mode=TwoWay}">
+                        <!--<ComboBoxItem Content="Low Pass Filter"/>
+                        <ComboBoxItem Content="High Pass Filter"/>
+                        <ComboBoxItem Content="Band Pass Filter"/>
+                        <ComboBoxItem Content="Band Reject Filter"/>-->
+                    </ComboBox>
+                </StackPanel>
 
                 <StackPanel x:Name="CutoffFrequencyOnePanel"
                             Grid.Row="1"
-                            Grid.Column="0"
-                            Grid.ColumnSpan="2"
                             Orientation="Horizontal"
                             Margin="10">
                     <TextBlock x:Name="CutoffFrequencyOneLabel"
                                Text="Cutoff Frequency (1) "
-                               FontSize="20"/>
+                               FontSize="20"
+                               VerticalAlignment="Center"/>
                     <Slider x:Name="CutoffFrequencyOneSlider"
                             Minimum="0"
                             Maximum="0.5"
                             TickFrequency="0.01"
                             IsSnapToTickEnabled="True"
-                            Width="250"/>
+                            Width="250"
+                            VerticalAlignment="Center"
+                            VerticalContentAlignment="Center"/>
                     <TextBlock x:Name="CutoffFrequencyOneReadOut"
                                Text="{Binding ElementName=CutoffFrequencyOneSlider, Path=Value, StringFormat={}{0:F2}}"
-                               FontSize="20"/>
+                               FontSize="20"
+                               VerticalAlignment="Center"/>
 
                 </StackPanel>
+
+                <StackPanel x:Name="CutoffFrequencyTwoPanel"
+                            Grid.Row="2"
+                            Orientation="Horizontal"
+                            Margin="10">
+                    <TextBlock x:Name="CutoffFrequencyTwoLabel"
+                               Text="Cutoff Frequency (2) "
+                               FontSize="20"
+                               VerticalAlignment="Center"/>
+                    <Slider x:Name="CutoffFrequencyTwoSlider"
+                            Minimum="0"
+                            Maximum="0.5"
+                            TickFrequency="0.01"
+                            IsSnapToTickEnabled="True"
+                            Width="250"
+                            VerticalAlignment="Center"
+                            VerticalContentAlignment="Center"/>
+                    <TextBlock x:Name="CutoffFrequencyTwoReadOut"
+                               Text="{Binding ElementName=CutoffFrequencyTwoSlider, Path=Value, StringFormat={}{0:F2}}"
+                               FontSize="20"
+                               VerticalAlignment="Center"/>
+
+                </StackPanel>
+
+                <Button x:Name="GenerateFilterButton"
+                        Content="Generate Filter"
+                        FontSize="20"
+                        Margin="10"
+                        Grid.Row="3"
+                        HorizontalAlignment="Left"
+                        MinWidth="240"/>
 
             </Grid>
         </Grid>
