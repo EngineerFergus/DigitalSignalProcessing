@@ -4,7 +4,7 @@ using OxyPlot;
 
 namespace ShowCase.ViewModels
 {
-    public class FilterViewModel
+    public class FilterViewModel : ObservableObject
     {
         private IFilter filter;
         public PlotModel FilterFrequencyPlot { get; private set; }

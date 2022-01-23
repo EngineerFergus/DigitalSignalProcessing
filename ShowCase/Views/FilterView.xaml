@@ -33,8 +33,68 @@
                    FontWeight="Bold"
                    Margin="60,20,20,20"
                    HorizontalAlignment="Left"
-                   VerticalAlignment="Center"
-                   Grid.ColumnSpan="2"/>
+                   VerticalAlignment="Top"
+                   Grid.ColumnSpan="1"/>
+
+            <Grid x:Name="FilterControlPanel"
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="3"
+                  Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock x:Name="FilterSelectionLabel"
+                           Text="Filter Type: "
+                           Grid.Row="0"
+                           Grid.Column="0"
+                           FontSize="20"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Center"/>
+
+                <ComboBox x:Name="FilterSelectionOptions"
+                          Grid.Row="0"
+                          Grid.Column="1"
+                          VerticalContentAlignment="Center"
+                          FontSize="16"
+                          MaxWidth="200">
+                    <ComboBoxItem Content="Low Pass Filter"/>
+                    <ComboBoxItem Content="High Pass Filter"/>
+                    <ComboBoxItem Content="Band Pass Filter"/>
+                    <ComboBoxItem Content="Band Reject Filter"/>
+                </ComboBox>
+
+                <StackPanel x:Name="CutoffFrequencyOnePanel"
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            Orientation="Horizontal"
+                            Margin="10">
+                    <TextBlock x:Name="CutoffFrequencyOneLabel"
+                               Text="Cutoff Frequency (1) "
+                               FontSize="20"/>
+                    <Slider x:Name="CutoffFrequencyOneSlider"
+                            Minimum="0"
+                            Maximum="0.5"
+                            TickFrequency="0.01"
+                            IsSnapToTickEnabled="True"
+                            Width="250"/>
+                    <TextBlock x:Name="CutoffFrequencyOneReadOut"
+                               Text="{Binding ElementName=CutoffFrequencyOneSlider, Path=Value, StringFormat={}{0:F2}}"
+                               FontSize="20"/>
+
+                </StackPanel>
+
+            </Grid>
         </Grid>
     </Border>
 </UserControl>
