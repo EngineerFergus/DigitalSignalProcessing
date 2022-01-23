@@ -25,7 +25,6 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
-                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
@@ -73,10 +72,6 @@
                               SelectedValuePath="Value"
                               DisplayMemberPath="Description"
                               SelectedValue="{Binding Path=SelectedType, Mode=TwoWay}">
-                        <!--<ComboBoxItem Content="Low Pass Filter"/>
-                        <ComboBoxItem Content="High Pass Filter"/>
-                        <ComboBoxItem Content="Band Pass Filter"/>
-                        <ComboBoxItem Content="Band Reject Filter"/>-->
                     </ComboBox>
                 </StackPanel>
 
@@ -95,7 +90,8 @@
                             IsSnapToTickEnabled="True"
                             Width="250"
                             VerticalAlignment="Center"
-                            VerticalContentAlignment="Center"/>
+                            VerticalContentAlignment="Center"
+                            Value="{Binding CutoffOne, Mode=TwoWay}"/>
                     <TextBlock x:Name="CutoffFrequencyOneReadOut"
                                Text="{Binding ElementName=CutoffFrequencyOneSlider, Path=Value, StringFormat={}{0:F2}}"
                                FontSize="20"
@@ -118,7 +114,8 @@
                             IsSnapToTickEnabled="True"
                             Width="250"
                             VerticalAlignment="Center"
-                            VerticalContentAlignment="Center"/>
+                            VerticalContentAlignment="Center"
+                            Value="{Binding CutoffTwo, Mode=TwoWay}"/>
                     <TextBlock x:Name="CutoffFrequencyTwoReadOut"
                                Text="{Binding ElementName=CutoffFrequencyTwoSlider, Path=Value, StringFormat={}{0:F2}}"
                                FontSize="20"
@@ -132,7 +129,8 @@
                         Margin="10"
                         Grid.Row="3"
                         HorizontalAlignment="Left"
-                        MinWidth="240"/>
+                        MinWidth="240"
+                        Command="{Binding GenerateFilterCommand, Mode=OneTime}"/>
 
             </Grid>
         </Grid>
