@@ -84,4 +84,4 @@ Once the windowed-sinc filter kernel is derived, low pass, high pass, band pass,
 <img src="ShowCase/Resources/BandRejectImage.PNG" width=50% height=50%>
 
 ## Showcase
-I made a simple MVVM wpf application that has interactive controls and plots for each of these major topics. All plots shown in this readme were taken from this application. I forced myself to learn the ICommand interface and how to write a converter for anum to collections that is especially helpful for presenting options, such as in a combo box, that map directly to enumerations made in the application.
+I made a simple MVVM wpf application that has interactive controls and plots for each of these major topics. All plots shown in this readme were taken from this application. I forced myself to learn the ICommand interface and how to write a converter for enum to collections. The enum converter is especially helpful for presenting options, such as in a combo box, that map directly to enumerations made in the application.
