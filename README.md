@@ -47,7 +47,7 @@ This is a common representation of the discrete sinc sequence since it is common
 ![sinc](ShowCase/Resources/SincImage.PNG)
 
 ## Discrete Fourier Transform (DFT)
-One of the most important algorithms for digital signal processing is the Discrete Fourier Transform (DFT). The DFT transforms a given signal into it's frequency components. This allows for a frequency analysis of a signal. This is crucial for filtering denoising, and frequency band isolation of signals. The DFT is calculated by correlating many complex sinusoidal waves with the given signal. The equation for the transform is shown below, where xn represents the original sequence at point n and Xk represents the frequency sequence at point k. The variable "i" represents the complex unit for the square root of -1.
+One of the most important algorithms for digital signal processing is the Discrete Fourier Transform (DFT). The DFT transforms a given signal into it's frequency components. This allows for a frequency analysis of a signal. This is crucial for filtering, denoising, and frequency band isolation of signals. The DFT is calculated by correlating many complex sinusoidal waves with the given signal. The equation for the transform is shown below, where xn represents the original sequence at point n and Xk represents the frequency sequence at point k. The variable "i" represents the complex unit for the square root of -1.
 
 <p align="center">
     <img src="https://latex.codecogs.com/svg.image?X_k=\sum_{n=0}^{N-1}x_ne^{-\frac{i2\pi}{N}kn}" title="X_k=\sum_{n=0}^{N-1}x_ne^{-\frac{i2\pi}{N}kn}" />
@@ -59,7 +59,7 @@ The main issue with the DFT is how computationally expensive it can become with 
 ![DFTFFT](ShowCase/Resources/DFTVFFTImage.PNG)
 
 ## Common Windows
-For digital filter design, the sinc sequence is commonly used in conjunction with spectral inversion and spectral reversal to design the four primitive filter types, low pass, high pass, band pass, and band reject filters. The only issue is that a perfect brickwall filter needs an infinitely long kernel sequence to avoid a phenomenon call spectral leakage and to prevent overshoot in the filter's frequence spectrum. Since a computer cannot hold an infinitely long filter kernel, the use of windows is necessary to imrpove filter performance. The general idea of a window is to cause the end points of a sequence to shrink in amplitude to prevent large amounts of spectral leakage caused by edge effects. Two of the most commonly used windows are the Blackman and Hamming windows. The equations for calculating sequences of length M and example plots are shown below.
+For digital filter design, the sinc sequence is commonly used in conjunction with spectral inversion and spectral reversal to design the four primitive filter types, low pass, high pass, band pass, and band reject filters. The only issue is that a perfect brickwall filter needs an infinitely long kernel sequence to avoid a phenomenon call spectral leakage and to prevent ripple in the filter's frequency spectrum. Since a computer cannot hold an infinitely long filter kernel, the use of windows is necessary to improve filter performance. The general idea of a window is to cause the end points of a sequence to shrink in amplitude to prevent large amounts of passband and stop band ripple caused by edge effects. Two of the most commonly used windows are the Blackman and Hamming windows. The equations for calculating sequences of length M and example plots are shown below.
 
 <p align="center">
     <img src="https://latex.codecogs.com/svg.image?Hamming[i]=0.54-0.46cos(\frac{2\pi&space;i}{M-1})" title="Hamming[i]=0.54-0.46cos(\frac{2\pi i}{M-1})" />
@@ -72,7 +72,7 @@ For digital filter design, the sinc sequence is commonly used in conjunction wit
 ![Windows](ShowCase/Resources/WindowsImage.PNG)
 
 ## Finite Impulse Response (FIR) Filters
-The general practice for digital filter design is to multiply elementwise between a sinc sequence and a window sequence to obtain a windowed-sinc lowpass filter kernel. These kernels are then manipulated using spectral inversion or reversal to make high pass, band pass, and band reject filters. Examples of the advantages of the windowed-sinc filter kernel over the sinc filter kernel are shown in the following plots. Notice the overshoot of the sinc filter kernel in the frequency domain and the stopband attenuation reaching only around -25 dB compared to around -80 dB for the windowed-sinc kernel.
+The general practice for digital filter design is to multiply elementwise between a sinc sequence and a window sequence to obtain a windowed-sinc lowpass filter kernel. These kernels are then manipulated using spectral inversion or reversal to make high pass, band pass, and band reject filters. Examples of the advantages of the windowed-sinc filter kernel over the sinc filter kernel are shown in the following plots. Notice the overshoot and ripple of the sinc filter kernel in the frequency domain and the stopband attenuation reaching only around -25 dB compared to around -80 dB for the windowed-sinc kernel.
 
 ![WindowedSinc](ShowCase/Resources/SincVWindowedSincImage.PNG)
 
